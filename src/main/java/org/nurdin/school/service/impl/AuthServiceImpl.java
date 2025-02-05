@@ -35,8 +35,6 @@ public class AuthServiceImpl implements AuthService, UserDetailsService {
             throw new UsernameNotFoundException("Пользователь не найден");
         }
 
-        System.out.println(getAuthorities(user));
-
         return User.builder()
                 .username(user.getUsername())
                 .password(user.getPassword())

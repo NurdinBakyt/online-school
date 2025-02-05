@@ -28,8 +28,13 @@ public class UserEntity extends BaseEntity {
     )
     private Set<RoleEntity> roles;
 
+
     public UserEntity() {
 
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 
     public String getUsername() {
@@ -87,7 +92,6 @@ public class UserEntity extends BaseEntity {
     public void setUserStatus(UserStatus userStatus) {
         this.userStatus = userStatus;
     }
-
 
     @Override
     public String toString() {

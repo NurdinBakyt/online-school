@@ -1,5 +1,6 @@
 package org.nurdin.school.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.nurdin.school.dto.RoleDTO;
 import org.nurdin.school.enums.UserStatus;
@@ -11,6 +12,7 @@ import java.util.Set;
 public class UserDtoResponse {
     private Long id;
     private String email;
+    @JsonProperty("username")
     private String username;
     private Set<RoleDTO> roles;
     @Schema(description = "дата добавления")
@@ -47,20 +49,20 @@ public class UserDtoResponse {
         this.email = email;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public Set<RoleDTO> getRoles() {
         return roles;
     }
 
     public void setRoles(Set<RoleDTO> roles) {
         this.roles = roles;
-    }
-
-    public String getUserName() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public LocalDateTime getCreatedAt() {
