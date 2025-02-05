@@ -20,15 +20,15 @@ public class UserEntity extends BaseEntity {
     @Column(name = "createdat")
     private LocalDateTime createdAt;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "m2m_users_roles",
-            joinColumns = @JoinColumn(name = "user_id",referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id",referencedColumnName = "id")
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
     )
     private Set<RoleEntity> roles;
 
-    public UserEntity(){
+    public UserEntity() {
 
     }
 
@@ -75,13 +75,13 @@ public class UserEntity extends BaseEntity {
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
-    @PrePersist
-    public void setCreatedAt() {
-        this.createdAt = LocalDateTime.now();
-    }
 
     public UserStatus getUserStatus() {
         return userStatus;
+    }
+
+    public void setCreatedAt() {
+        this.createdAt = LocalDateTime.now();
     }
 
     public void setUserStatus(UserStatus userStatus) {

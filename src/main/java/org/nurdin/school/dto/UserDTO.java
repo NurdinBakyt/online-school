@@ -10,8 +10,8 @@ import java.util.Set;
 @Schema(description = "ДТОшки пользователей со всеми его полями ")
 public class UserDTO {
     private Long id;
-    private String username;
     private String email;
+    private String username;
     private String password;
     private Set<RoleDTO> roles;
     private UserStatus userStatus;
@@ -41,6 +41,7 @@ public class UserDTO {
     public void setUserStatus(UserStatus userStatus) {
         this.userStatus = userStatus;
     }
+
     public String getPassword() {
         return password;
     }
