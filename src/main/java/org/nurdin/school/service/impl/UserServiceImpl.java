@@ -5,6 +5,7 @@ import org.nurdin.school.entity.UserEntity;
 import org.nurdin.school.repository.RoleRepository;
 import org.nurdin.school.repository.UserRepository;
 import org.nurdin.school.service.UserService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -14,10 +15,12 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository) {
+    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -28,6 +31,7 @@ public class UserServiceImpl implements UserService {
                         .orElseThrow(() -> new RuntimeException("Роль не найдена")))
                 .collect(Collectors.toSet());
         user.setRoles(roles);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
