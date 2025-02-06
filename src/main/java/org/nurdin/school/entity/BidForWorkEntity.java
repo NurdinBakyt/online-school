@@ -26,6 +26,12 @@ public class BidForWorkEntity {
     private String documentsOfEmployee;
     @Column(name = "bid_status")
     private StatusOfBid bidStatus;
+    //имя ,фамилия обязятельно
+    //отцество не обязательно но надо
+    //возраст обязательно
+    //номер телефона обязатлеьно
+    //паспорт
+    //резюме
 
     @Column(name = "email")
     private String email;
