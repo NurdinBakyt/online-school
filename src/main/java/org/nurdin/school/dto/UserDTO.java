@@ -1,6 +1,7 @@
 package org.nurdin.school.dto;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.nurdin.school.entity.BaseEntity;
 import org.nurdin.school.enums.UserStatus;
@@ -11,6 +12,7 @@ import java.util.Set;
 public class UserDTO {
     private Long id;
     private String email;
+    @JsonProperty("username")
     private String username;
     private String password;
     private Set<RoleDTO> roles;

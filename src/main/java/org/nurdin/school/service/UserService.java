@@ -11,7 +11,7 @@ public interface UserService {
     UserEntity findByUsername(String username);
     UserEntity findByEmail(String email);
     UserEntity updateUsername(String username, String newusername);
-    UserEntity updateUserPassword(String email, String newPassword);
+    UserEntity updateUserPassword(String password, String newPassword);
     UserEntity deleteUser(Long id);
     UserEntity deleteUserByName(String username);
     UserEntity deleteUserByEmail(String email);

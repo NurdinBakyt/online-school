@@ -2,10 +2,13 @@ package org.nurdin.school.controller;
 
 import org.nurdin.school.dto.NewsDto;
 import org.nurdin.school.entity.NewsEntity;
+import org.nurdin.school.exceptions.NewNotFoundException;
+import org.nurdin.school.exceptions.UserNotFoundException;
 import org.nurdin.school.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,6 +26,7 @@ public class NewsController {
         this.newsService = newsService;
     }
 
+    @PreAuthorize("hasAnyAuthority(\"DIRECTOR\", \"SECRETARY\", \"HEAD_TEACHER\")")
     @PostMapping("/addNews")
     public ResponseEntity<?> addNews(
         @RequestPart NewsEntity news, 
@@ -33,14 +37,24 @@ public class NewsController {
             URI location = URI.create("/api/v1/news/detAllNews");
             return ResponseEntity.created(location).body(newsEntity);
         } catch(Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            throw new NewNotFoundException(e.getMessage());
         }
         
     }
-
+    
+    
     @GetMapping("/detAllNews")
-    public List<NewsDto> getAllNews() {
-        return newsService.getAllNews();
+    public List<NewsDto> getAllNews(
+        @RequestParam(
+            value = "offset",
+            defaultValue = "0"
+        ) Integer offset,
+        @RequestParam(
+            value = "limit",
+            defaultValue = "10"
+        ) Integer limit
+    ) {
+        return newsService.getAllNews(offset, limit);
     }
 
     @GetMapping("/getNewsById")
@@ -49,7 +63,7 @@ public class NewsController {
             NewsEntity news = newsService.getNewsById(id);
             return ResponseEntity.ok(news);
         } catch(RuntimeException e) {
-            return ResponseEntity.status(404).body("Error: " + e.getMessage());
+            throw new NewNotFoundException(e.getMessage());
         }
     }
 

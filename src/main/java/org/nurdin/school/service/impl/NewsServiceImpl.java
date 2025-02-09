@@ -1,12 +1,15 @@
 package org.nurdin.school.service.impl;
 
+import org.springframework.data.domain.Page;
 import org.nurdin.school.dto.NewsDto;
 import org.nurdin.school.dto.RoleDTO;
 import org.nurdin.school.dto.response.UserDtoResponse;
 import org.nurdin.school.entity.NewsEntity;
 import org.nurdin.school.repository.NewsRepository;
 import org.nurdin.school.service.NewsService;
+import org.springdoc.core.converters.models.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -35,9 +38,10 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public List<NewsDto> getAllNews() {
-        List<NewsEntity> newsEntities = newsRepository.findAll();
-        return newsEntities.stream().map(entity -> {
+    public List<NewsDto> getAllNews(Integer offset, Integer limit) {
+        PageRequest pageable = PageRequest.of(offset, limit);
+        Page<NewsEntity> newsEntities = newsRepository.findAll(pageable);
+        return newsEntities.getContent().stream().map(entity -> {
             NewsDto dto = new NewsDto();
             Set<RoleDTO> roleDTOSet = entity.getAuthor().getRoles().stream()
                 .map(role -> new RoleDTO(role.getId(), role.getTitle()))

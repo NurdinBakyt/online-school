@@ -2,6 +2,7 @@ package org.nurdin.school.service.impl;
 
 import org.nurdin.school.entity.RoleEntity;
 import org.nurdin.school.entity.UserEntity;
+import org.nurdin.school.exceptions.UserNotFoundException;
 import org.nurdin.school.repository.RoleRepository;
 import org.nurdin.school.repository.UserRepository;
 import org.nurdin.school.service.UserService;
@@ -37,12 +38,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<UserEntity> findById(Long id) {
-        return userRepository.findById(id);
+        Optional<UserEntity> user = userRepository.findById(id);
+        if (user.isEmpty()) {
+            throw new UserNotFoundException("Такой пользователь не найден");
+        }
+        return user;
     }
 
     @Override
     public UserEntity findByUsername(String name) {
-        return userRepository.findByUsername(name);
+        UserEntity user = userRepository.findByUsername(name);
+        if (user == null){
+            throw new UserNotFoundException("Такой пользователь не найден");
+        }
+        return user;
     }
 
     @Override
@@ -53,13 +62,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserEntity updateUsername(String username, String newUsername) {
         UserEntity user = userRepository.findByUsername(username);
+        if (user == null) {
+            throw new UserNotFoundException("Такой пользователь не найден");
+        }
         user.setUsername(newUsername);
         return userRepository.save(user);
     }
 
     @Override
-    public UserEntity updateUserPassword(String email, String newPassword) {
-        UserEntity user = userRepository.findByEmail(email);
+    public UserEntity updateUserPassword(String password, String newPassword) {
+        UserEntity user = userRepository.findByPassword(password);
+        if(user == null){
+            throw new UserNotFoundException("Неверный пароль");
+        }
         user.setPassword(newPassword);
         return userRepository.save(user);
     }

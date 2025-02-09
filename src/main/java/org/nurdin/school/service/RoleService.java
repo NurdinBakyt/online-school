@@ -15,9 +15,9 @@ public interface RoleService {
 
     void delete(Long user_id,Long role_id);
 
-    void deleteByRoleId(Long roleId);
+    void deleteByTitle(Long user_id,String roleName);
 
-    void deleteByRoleTitle(String roleTitle);
+    void deleteByRoleId(Long roleId);
 
     RoleEntity addNewRole(RoleEntity role);
 }

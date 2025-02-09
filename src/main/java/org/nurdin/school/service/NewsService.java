@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface NewsService {
     NewsEntity addNews(NewsEntity news, MultipartFile imageFile) throws IOException;
-    List<NewsDto> getAllNews();
+    List<NewsDto> getAllNews(Integer offset, Integer limit);
     NewsEntity getNewsById(Long id);
     void updateNews(NewsEntity news);
     void deleteNews(String id);
