@@ -93,12 +93,11 @@ public class UserController {
     @PreAuthorize(value = "hasAnyAuthority('DIRECTOR','ADMIN')")
     @DeleteMapping("/delete-user-by-id/{id}")
     public ResponseEntity<String> deleteUserById(@PathVariable Long id) {
-        UserEntity user = userService.findById(id)
-                .orElseThrow(() -> new RuntimeException("Пользователь с ID " + id + " не найден"));
-
+        Optional<UserEntity> userEntity = userService.findById(id);
         userService.deleteUser(id);
-        return ResponseEntity.ok("Пользователь " + user.getUsername() + " удален");
+        return ResponseEntity.ok("Пользователь удален");
     }
+
 
     @PreAuthorize(value = "hasAnyAuthority('DIRECTOR','ADMIN')")
     @DeleteMapping("/delete-user-by-name")

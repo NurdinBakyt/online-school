@@ -6,11 +6,6 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "news")
 public class NewsEntity extends BaseEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
-
     @ManyToOne
     @JoinColumn(name = "author_id", nullable = false)
     private UserEntity author;
@@ -21,10 +16,40 @@ public class NewsEntity extends BaseEntity {
     @Column(name = "content", nullable = false, columnDefinition = "TEXT")
     private String content;
 
+    private String imageName;
+    private String imageType;
+
+    @Lob
+    private byte[] imageDate;
+
     @Column(name = "date", nullable = false)
     private LocalDateTime date;
 
     public NewsEntity() {}
+
+    public void setImageDate(byte[] imageDate) {
+        this.imageDate = imageDate;
+    }
+
+    public byte[] getImageDate() {
+        return imageDate;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
+
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageType(String imageType) {
+        this.imageType = imageType;
+    }
+
+    public String getImageType() {
+        return imageType;
+    }
 
     public Long getId() {
         return id;
