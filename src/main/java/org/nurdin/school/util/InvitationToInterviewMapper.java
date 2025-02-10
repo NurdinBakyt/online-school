@@ -12,7 +12,7 @@ public class InvitationToInterviewMapper {
         InvitationToInterviewEntity invitationToInterviewEntity = new InvitationToInterviewEntity();
         invitationToInterviewEntity.setInterviewDate(invitationToInterviewDTO.getInterviewDate());
         invitationToInterviewEntity.setInvitation(invitationToInterviewDTO.getInvitation());
-        invitationToInterviewEntity.setEmailUser(invitationToInterviewDTO.getEmailUser());
+
 
         return invitationToInterviewEntity;
     }
