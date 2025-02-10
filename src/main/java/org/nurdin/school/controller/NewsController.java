@@ -81,7 +81,14 @@ public class NewsController {
     }
 
     @DeleteMapping("/deleteNews")
-    public void deleteNews(@PathVariable String id) {
-        newsService.deleteNews(id);
+    public ResponseEntity<String> deleteNews(@PathVariable String id) {
+        try {
+            newsService.deleteNews(id);
+            return ResponseEntity.ok(
+                String.format("Новость c id:№%d удалена успешно!", id)
+            );
+        } catch(RuntimeException e) {
+            throw new NewNotFoundException(e.getMessage());
+        }
     }
 }
