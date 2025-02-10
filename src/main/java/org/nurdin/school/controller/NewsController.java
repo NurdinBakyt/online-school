@@ -1,7 +1,8 @@
 package org.nurdin.school.controller;
 
-import org.nurdin.school.dto.NewsCreateDTO;
 import org.nurdin.school.dto.NewsDto;
+import org.nurdin.school.dto.request.NewsCreateDTO;
+import org.nurdin.school.dto.request.NewsUpdateDTO;
 import org.nurdin.school.entity.NewsEntity;
 import org.nurdin.school.exceptions.NewNotFoundException;
 import org.nurdin.school.service.NewsService;
@@ -67,8 +68,16 @@ public class NewsController {
     }
 
     @PutMapping("/updateNews")
-    public void updateNews(@RequestBody NewsEntity news) {
-        newsService.updateNews(news);
+    public ResponseEntity<?> updateNews(
+        @RequestPart NewsUpdateDTO newsDto,
+        @RequestPart MultipartFile imageFile
+    ) {
+        try {
+            NewsEntity newsEntity = newsService.updateNews(newsDto, imageFile);
+            return ResponseEntity.ok(newsEntity);
+        } catch(Exception e) {
+            throw new NewNotFoundException(e.getMessage());
+        }
     }
 
     @DeleteMapping("/deleteNews")

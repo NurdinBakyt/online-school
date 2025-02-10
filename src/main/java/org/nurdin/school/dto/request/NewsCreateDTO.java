@@ -1,4 +1,4 @@
-package org.nurdin.school.dto;
+package org.nurdin.school.dto.request;
 
 import java.time.LocalDateTime;
 
