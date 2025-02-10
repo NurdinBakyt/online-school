@@ -1,4 +1,4 @@
-CREATE TABLE news (
+CREATE TABLE if not exists news (
     id BIGSERIAL PRIMARY KEY,
     author_id BIGINT NOT NULL,
     title VARCHAR(255) NOT NULL,
