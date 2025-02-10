@@ -4,7 +4,7 @@ import org.nurdin.school.entity.BidForWorkEntity;
 
 import java.util.List;
 
-public interface BidForWorkServise {
+public interface BidForWorkService {
     void saveBidForWork(BidForWorkEntity bidForWorkEntity);
     void deleteBidForWork();
     void updateBidForWork(BidForWorkEntity bidForWorkEntity);
