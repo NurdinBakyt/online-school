@@ -1,5 +1,8 @@
 package org.nurdin.school.service;
 
+import org.nurdin.school.dto.InvitationToInterviewDTO;
+import org.nurdin.school.dto.RejectionOfTheBidDTO;
+import org.nurdin.school.entity.UserEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -23,4 +26,30 @@ public class MailSenderService {
 
         mailSender.send(mailMessage);
     }
+
+    public void sendMailToInterview (UserEntity user , InvitationToInterviewDTO invitationToInterviewDTO) {
+        String userName = user.getUsername();
+        String invitation = invitationToInterviewDTO.getInvitation();
+        String interviewDate = invitationToInterviewDTO.getInterviewDate();
+        String messageForUser = invitation + interviewDate;
+
+        sendMail(
+                user.getEmail(),
+                user.getUsername(),
+                invitation + interviewDate
+        );
+    }
+
+    public void sendMailToRejection (UserEntity user , RejectionOfTheBidDTO rejectionOfTheBidDTO) {
+        String userName = user.getUsername();
+        String mail = rejectionOfTheBidDTO.getMail();
+
+
+        sendMail(
+                user.getEmail(),
+                user.getUsername(),
+                mail
+        );
+    }
+
 }

@@ -7,7 +7,7 @@ import jakarta.persistence.Table;
 public class InvitationToInterviewEntity extends BaseEntity {
     private String  invitation;
     private String  interviewDate;
-    private String  emailUser;
+
 
     public String getInvitation() {
         return invitation;
@@ -25,11 +25,5 @@ public class InvitationToInterviewEntity extends BaseEntity {
         this.interviewDate = interviewDate;
     }
 
-    public String getEmailUser() {
-        return emailUser;
-    }
-
-    public void setEmailUser(String emailUser) {
-        this.emailUser = emailUser;
-    }
+    
 }
