@@ -1,12 +1,14 @@
 package org.nurdin.school.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 
 import java.util.Set;
 
 @Entity
 @Table(name = "roles")
+@Schema(description = "")
 public class RoleEntity extends BaseEntity {
     private String title;
 

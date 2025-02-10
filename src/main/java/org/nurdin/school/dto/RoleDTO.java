@@ -1,8 +1,12 @@
 package org.nurdin.school.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 
+@Schema(description = "ДТОшка ролей")
 public class RoleDTO {
+    @Schema(description = "это ID")
     private Long id;
+    @Schema(description = "это звание")
     private String title;
 
     public RoleDTO(Long id, String title) {

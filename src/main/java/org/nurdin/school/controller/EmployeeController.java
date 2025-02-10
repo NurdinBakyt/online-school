@@ -1,5 +1,6 @@
 package org.nurdin.school.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.nurdin.school.dto.BidForWorkDTO;
 import org.nurdin.school.entity.BidForWorkEntity;
 import org.nurdin.school.service.impl.BidForWorkServiceImpl;
@@ -21,6 +22,7 @@ public class EmployeeController {
     }
 
     @PostMapping(value = "/createBidForWork")
+    @Operation(summary = "Создание заявки на вступление в ряды работников в школе")
     public void createBidForWork(
             @RequestBody BidForWorkEntity bidForWorkEntity
     ) {
@@ -28,6 +30,7 @@ public class EmployeeController {
     }
 
     @GetMapping(value = "/getAllBids")
+    @Operation(summary = "Добавление заявок")
     public List<BidForWorkEntity> getAllBids() {
         return bidForWorkServiceImpl.getAllBidForWork();
     }

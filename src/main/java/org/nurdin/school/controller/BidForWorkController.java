@@ -1,3 +1,4 @@
+
 package org.nurdin.school.controller;
 
 import org.nurdin.school.dto.InvitationToInterviewDTO;
@@ -76,7 +77,6 @@ public class BidForWorkController {
         rejectionOfTheBidService.save(rejectionOfTheBidMapper.rejectionOfTheBidDTOtoEntity(rejectionOfTheBidDTO));
 
         mailSenderService.sendMailToRejection(user,rejectionOfTheBidDTO);
-
         return bidForWorkMapper.bidForWorkEntityAndUserEntityToBidForWorkAcceptResponse(user ,bidForWorkEntity );
 
     }

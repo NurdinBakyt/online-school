@@ -67,7 +67,7 @@ public class UserDTOMapper {
         userDtoResponse.setEmail(userEntity.getEmail());
         userDtoResponse.setUsername(userEntity.getUsername());
         userDtoResponse.setRoles(userEntity.getRoles().stream()
-                .map(x -> new RoleDTO(x.getId(), x.getTitle()))
+                .map(roleEntity -> new RoleDTO(roleEntity.getId(), roleEntity.getTitle()))
                 .collect(Collectors.toSet()));
         userDtoResponse.setUserStatus(userEntity.getUserStatus());
         userDtoResponse.setCreatedAt();

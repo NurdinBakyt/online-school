@@ -10,10 +10,10 @@ public interface UserService {
     Optional<UserEntity> findById(Long id);
     UserEntity findByUsername(String username);
     UserEntity findByEmail(String email);
-    UserEntity updateUser(UserEntity user);
-    UserEntity updatePassword(UserEntity user, String newPassword);
+    UserEntity updateUsername(String username, String newusername);
+    UserEntity updateUserPassword(String email, String newPassword);
     UserEntity deleteUser(Long id);
-    UserEntity deleteUserByUsername(String username);
+    UserEntity deleteUserByName(String username);
     UserEntity deleteUserByEmail(String email);
     List<UserEntity> getAllUsers();
 }

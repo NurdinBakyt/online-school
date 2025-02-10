@@ -1,4 +1,4 @@
-create table bids_for_work(
+create table if not exists bids_for_work(
     id bigserial primary key ,
     info_of_employee varchar not null,
     documents_of_employee varchar not null,

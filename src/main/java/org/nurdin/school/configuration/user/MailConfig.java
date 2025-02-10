@@ -1,4 +1,4 @@
-package org.nurdin.school.configurations;
+package org.nurdin.school.configuration.user;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,5 +1,6 @@
 package org.nurdin.school.entity;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import org.nurdin.school.enums.EmployeeStatus;
 
@@ -16,10 +17,12 @@ public class EmployeeEntity extends BaseEntity {
     private String resume;
     private int age;
     private String email;
+    @Schema(description = " дата добавления")
     private LocalDateTime createdAt;
 
     @Column(name = "employee_status")
     @Enumerated(EnumType.STRING)
+    @Schema(description = "Статус нового сотрудника, по типу принят или отклонён; перевод (APPROVED : ОДОБРЕННЫЙ) ( REJECTED : ОТКЛОНЕННЫЙ)")
     private EmployeeStatus employeeStatus;
 
     @ManyToOne
