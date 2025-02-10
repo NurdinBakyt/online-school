@@ -1,13 +1,16 @@
 package org.nurdin.school.service.impl;
 
 import org.springframework.data.domain.Page;
+import org.nurdin.school.dto.NewsCreateDTO;
 import org.nurdin.school.dto.NewsDto;
 import org.nurdin.school.dto.RoleDTO;
 import org.nurdin.school.dto.response.UserDtoResponse;
 import org.nurdin.school.entity.NewsEntity;
+import org.nurdin.school.entity.UserEntity;
 import org.nurdin.school.repository.NewsRepository;
+import org.nurdin.school.repository.UserRepository;
 import org.nurdin.school.service.NewsService;
-import org.springdoc.core.converters.models.Pageable;
+import org.nurdin.school.util.NewsCreateDtoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -22,15 +25,25 @@ import java.util.stream.Collectors;
 @Service
 public class NewsServiceImpl implements NewsService {
 
+    private final UserRepository userRepository;
     private final NewsRepository newsRepository;
+    private final NewsCreateDtoMapper newsCreateDtoMapper;
 
     @Autowired
-    public NewsServiceImpl(NewsRepository newsRepository) {
+    public NewsServiceImpl(
+        NewsRepository newsRepository,
+        UserRepository userRepository,
+        NewsCreateDtoMapper newsCreateDtoMapper
+    ) {
+        this.userRepository = userRepository;
         this.newsRepository = newsRepository;
+        this.newsCreateDtoMapper = newsCreateDtoMapper;
     }
 
     @Override
-    public NewsEntity addNews(NewsEntity news, MultipartFile imageFile) throws IOException {
+    public NewsEntity addNews(NewsCreateDTO newsDto, MultipartFile imageFile) throws IOException {
+        UserEntity author = userRepository.findByUsername(newsDto.getUsername());
+        NewsEntity news = newsCreateDtoMapper.newsDTOToEntity(newsDto, author);
         news.setImageName(imageFile.getOriginalFilename());
         news.setImageType(imageFile.getContentType());
         news.setImageDate(imageFile.getBytes());
