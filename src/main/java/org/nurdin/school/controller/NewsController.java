@@ -62,8 +62,9 @@ public class NewsController {
     }
 
     @PutMapping("/updateNews")
-    public void updateNews(@RequestBody NewsEntity news) {
+    public ResponseEntity<String> updateNews(@RequestBody NewsEntity news) {
         newsService.updateNews(news);
+        return ResponseEntity.ok("Новость успешно обновлена");
     }
 
     @DeleteMapping("/deleteNews")
