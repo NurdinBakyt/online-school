@@ -52,6 +52,13 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
+    public NewsEntity addNewsNotImage(NewsCreateDTO newsDto) {
+        UserEntity author = userRepository.findByUsername(newsDto.getUsername());
+        NewsEntity news = newsDtoMapper.newsСreateDTOToEntity(newsDto, author);
+        return newsRepository.save(news);
+    }
+
+    @Override
     public List<NewsDto> getAllNews(Integer offset, Integer limit) {
         PageRequest pageable = PageRequest.of(offset, limit);
         Page<NewsEntity> newsEntities = newsRepository.findAll(pageable);
