@@ -3,7 +3,6 @@ package org.nurdin.school.dto;
 public class InvitationToInterviewDTO {
     private String  invitation;
     private String  interviewDate;
-    private String  emailUser;
 
     public String getInvitation() {
         return invitation;
@@ -21,11 +20,4 @@ public class InvitationToInterviewDTO {
         this.interviewDate = interviewDate;
     }
 
-    public String getEmailUser() {
-        return emailUser;
-    }
-
-    public void setEmailUser(String emailUser) {
-        this.emailUser = emailUser;
-    }
 }
