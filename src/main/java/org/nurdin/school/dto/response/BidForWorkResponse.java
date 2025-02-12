@@ -1,8 +1,9 @@
-package org.nurdin.school.dto;
+package org.nurdin.school.dto.response;
 
 import org.nurdin.school.enums.StatusOfBid;
 
-public class BidForWorkDTO {
+public class BidForWorkResponse {
+    private String username;
     private String resume;
     private String passport;
     private StatusOfBid bidStatus;
@@ -19,6 +20,14 @@ public class BidForWorkDTO {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getResume() {

@@ -14,5 +14,15 @@ public class BidForStudyEntity extends BaseEntity {
     private int idDirector;
     @Column(name = "statusOfBidConsideration")
     private Boolean statusOfBidConsideration;
+    //имя , фамилия ,отчетво(не обязятельно)  - родителя
+    //свидельство о рождении(ребенка) , место жительство (адрес) , заявление родителей(несколько паспортов это Мамин и Папин)
+    //мед справка копия
+    //мед книжка
+    //
+    //имя, фамилия ,отчетво(не обязятельно)
+    //возраст
+    //мед книжка (ребенка)
+    //в какой класс пойдет()
+
 
 }
