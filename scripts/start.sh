@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 log() {
     echo "[INFO] $(date +'%Y-%m-%d %H:%M:%S') - $1"
