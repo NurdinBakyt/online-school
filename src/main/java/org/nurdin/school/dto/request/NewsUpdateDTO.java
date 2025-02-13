@@ -1,9 +1,19 @@
 package org.nurdin.school.dto.request;
 
+import org.nurdin.school.entity.UserEntity;
+
 public class NewsUpdateDTO {
     private Long id;
     private String newsTitle;
     private String newsContent;
+    private UserEntity author;
+    
+    public UserEntity getAuthor() {
+        return author;
+    }
+    public void setAuthor(UserEntity author) {
+        this.author = author;
+    }
 
     public Long getId() {
         return id;

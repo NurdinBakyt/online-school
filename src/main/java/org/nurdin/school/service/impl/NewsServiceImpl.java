@@ -45,9 +45,16 @@ public class NewsServiceImpl implements NewsService {
     public NewsEntity addNews(NewsCreateDTO newsDto, MultipartFile imageFile) throws IOException {
         UserEntity author = userRepository.findByUsername(newsDto.getUsername());
         NewsEntity news = newsDtoMapper.newsСreateDTOToEntity(newsDto, author);
-        news.setImageName(imageFile.getOriginalFilename());
-        news.setImageType(imageFile.getContentType());
-        news.setImageDate(imageFile.getBytes());
+        // news.setImageName(imageFile.getOriginalFilename());
+        // news.setImageType(imageFile.getContentType());
+        // news.setImageDate(imageFile.getBytes());
+        return newsRepository.save(news);
+    }
+
+    @Override
+    public NewsEntity addNewsNotImage(NewsCreateDTO newsDto) {
+        UserEntity author = userRepository.findByUsername(newsDto.getUsername());
+        NewsEntity news = newsDtoMapper.newsСreateDTOToEntity(newsDto, author);
         return newsRepository.save(news);
     }
 
@@ -86,9 +93,20 @@ public class NewsServiceImpl implements NewsService {
             throw new RuntimeException("News not found with id: " + newsDto.getId());
         }
         NewsEntity news = newsDtoMapper.newsUpdateDTOToEntity(newsDto);
-        news.setImageName(imageFile.getOriginalFilename());
-        news.setImageType(imageFile.getContentType());
-        news.setImageDate(imageFile.getBytes());
+        // news.setImageName(imageFile.getOriginalFilename());
+        // news.setImageType(imageFile.getContentType());
+        // news.setImageDate(imageFile.getBytes());
+        return newsRepository.save(news);
+    }
+
+    @Override
+    public NewsEntity updateNewsNotImage(NewsUpdateDTO newsDto) {
+        if (newsDto.getId() == null || !newsRepository.existsById(newsDto.getId())) {
+            throw new RuntimeException("News not found with id: " + newsDto.getId());
+        }
+        NewsEntity newsUpdate = newsRepository.findById(newsDto.getId()).orElse(null);
+        newsDto.setAuthor(newsUpdate.getAuthor());
+        NewsEntity news = newsDtoMapper.newsUpdateDTOToEntity(newsDto);
         return newsRepository.save(news);
     }
 

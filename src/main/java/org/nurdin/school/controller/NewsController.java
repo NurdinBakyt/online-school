@@ -26,14 +26,14 @@ public class NewsController {
         this.newsService = newsService;
     }
 
-    @PreAuthorize("hasAnyAuthority(\"DIRECTOR\", \"SECRETARY\", \"HEAD_TEACHER\")")
+    // @PreAuthorize("hasAnyAuthority(\"DIRECTOR\", \"SECRETARY\", \"HEAD_TEACHER\")")
     @PostMapping("/addNews")
     public ResponseEntity<?> addNews(
-        @RequestPart NewsCreateDTO newsDto, 
-        @RequestPart MultipartFile imageFile
+        @RequestBody NewsCreateDTO newsDto
+        // @RequestPart MultipartFile imageFile
     ) {
         try {
-            NewsEntity newsEntity = newsService.addNews(newsDto, imageFile);
+            NewsEntity newsEntity = newsService.addNewsNotImage(newsDto);
             URI location = URI.create("/api/v1/news/detAllNews");
             return ResponseEntity.created(location).body(newsEntity);
         } catch(Exception e) {
@@ -41,7 +41,6 @@ public class NewsController {
         }
         
     }
-    
     
     @GetMapping("/detAllNews")
     public List<NewsDto> getAllNews(
@@ -67,19 +66,21 @@ public class NewsController {
         }
     }
 
+    // @PreAuthorize("hasAnyAuthority(\"DIRECTOR\", \"SECRETARY\", \"HEAD_TEACHER\")")
     @PutMapping("/updateNews")
     public ResponseEntity<?> updateNews(
-        @RequestPart NewsUpdateDTO newsDto,
-        @RequestPart MultipartFile imageFile
+        @RequestBody NewsUpdateDTO newsDto
+        // @RequestPart MultipartFile imageFile
     ) {
         try {
-            NewsEntity newsEntity = newsService.updateNews(newsDto, imageFile);
+            NewsEntity newsEntity = newsService.updateNewsNotImage(newsDto);
             return ResponseEntity.ok(newsEntity);
         } catch(Exception e) {
             throw new NewNotFoundException(e.getMessage());
         }
     }
 
+    @PreAuthorize("hasAnyAuthority(\"DIRECTOR\", \"SECRETARY\", \"HEAD_TEACHER\")")
     @DeleteMapping("/deleteNews")
     public ResponseEntity<String> deleteNews(@PathVariable String id) {
         try {
