@@ -15,5 +15,6 @@ public interface NewsService {
     List<NewsDto> getAllNews(Integer offset, Integer limit);
     NewsEntity getNewsById(Long id);
     NewsEntity updateNews(NewsUpdateDTO newsDto, MultipartFile imageFile) throws IOException;
+    NewsEntity updateNewsNotImage(NewsUpdateDTO newsDto);
     void deleteNews(String id);
 }

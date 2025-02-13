@@ -27,6 +27,11 @@ public class NewsEntity extends BaseEntity {
 
     public NewsEntity() {}
 
+    @PrePersist
+    protected void onCreate() {
+        this.date = LocalDateTime.now();
+    }
+
     // public void setImageDate(byte[] imageDate) {
     //     this.imageDate = imageDate;
     // }

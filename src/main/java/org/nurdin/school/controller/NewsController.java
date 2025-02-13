@@ -42,7 +42,6 @@ public class NewsController {
         
     }
     
-    
     @GetMapping("/detAllNews")
     public List<NewsDto> getAllNews(
         @RequestParam(
@@ -67,19 +66,21 @@ public class NewsController {
         }
     }
 
+    // @PreAuthorize("hasAnyAuthority(\"DIRECTOR\", \"SECRETARY\", \"HEAD_TEACHER\")")
     @PutMapping("/updateNews")
     public ResponseEntity<?> updateNews(
-        @RequestPart NewsUpdateDTO newsDto,
-        @RequestPart MultipartFile imageFile
+        @RequestBody NewsUpdateDTO newsDto
+        // @RequestPart MultipartFile imageFile
     ) {
         try {
-            NewsEntity newsEntity = newsService.updateNews(newsDto, imageFile);
+            NewsEntity newsEntity = newsService.updateNewsNotImage(newsDto);
             return ResponseEntity.ok(newsEntity);
         } catch(Exception e) {
             throw new NewNotFoundException(e.getMessage());
         }
     }
 
+    @PreAuthorize("hasAnyAuthority(\"DIRECTOR\", \"SECRETARY\", \"HEAD_TEACHER\")")
     @DeleteMapping("/deleteNews")
     public ResponseEntity<String> deleteNews(@PathVariable String id) {
         try {

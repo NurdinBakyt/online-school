@@ -48,7 +48,6 @@ public class NewsDtoMapper {
         NewsEntity newsEntity = new NewsEntity();
         newsEntity.setContent(newsDto.getNewsContent());
         newsEntity.setTitle(newsDto.getNewsTitle());
-        newsEntity.setDate(newsDto.getDateTime());
         newsEntity.setAuthor(author);
         return newsEntity;
     }
@@ -58,6 +57,7 @@ public class NewsDtoMapper {
         newsEntity.setId(newsDto.getId());
         newsEntity.setContent(newsDto.getNewsContent());
         newsEntity.setTitle(newsDto.getNewsTitle());
+        newsEntity.setAuthor(newsDto.getAuthor());
         return newsEntity;
     }
 }
