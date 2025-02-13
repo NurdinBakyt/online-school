@@ -105,9 +105,9 @@ public class NewsServiceImpl implements NewsService {
             throw new RuntimeException("News not found with id: " + newsDto.getId());
         }
         NewsEntity newsUpdate = newsRepository.findById(newsDto.getId()).orElse(null);
-        newsDto.setAuthor(newsUpdate.getAuthor());
-        NewsEntity news = newsDtoMapper.newsUpdateDTOToEntity(newsDto);
-        return newsRepository.save(news);
+        newsUpdate.setTitle(newsDto.getNewsTitle());
+        newsUpdate.setContent(newsDto.getNewsContent());
+        return newsRepository.save(newsUpdate);
     }
 
     @Override
