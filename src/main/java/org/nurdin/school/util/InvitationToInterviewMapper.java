@@ -1,20 +1,20 @@
 package org.nurdin.school.util;
 
 
-import org.nurdin.school.dto.InvitationToInterviewDTO;
-import org.nurdin.school.entity.InvitationToInterviewEntity;
+import org.nurdin.school.dto.InvitationToInterviewForWorkDTO;
+import org.nurdin.school.entity.InvitationToInterviewForWorkEntity;
 import org.springframework.stereotype.Component;
 
 @Component
 public class InvitationToInterviewMapper {
-    //InvitationToInterviewDTO ==> InvitationToInterviewEntity
-    public InvitationToInterviewEntity invitationToInterviewDTOtoEntity(InvitationToInterviewDTO invitationToInterviewDTO) {
-        InvitationToInterviewEntity invitationToInterviewEntity = new InvitationToInterviewEntity();
-        invitationToInterviewEntity.setInterviewDate(invitationToInterviewDTO.getInterviewDate());
-        invitationToInterviewEntity.setInvitation(invitationToInterviewDTO.getInvitation());
+    //InvitationToInterviewForWorkDTO ==> InvitationToInterviewForWorkEntity
+    public InvitationToInterviewForWorkEntity invitationToInterviewDTOtoEntity(InvitationToInterviewForWorkDTO invitationToInterviewForWorkDTO) {
+        InvitationToInterviewForWorkEntity invitationToInterviewForWorkEntity = new InvitationToInterviewForWorkEntity();
+        invitationToInterviewForWorkEntity.setInterviewDate(invitationToInterviewForWorkDTO.getInterviewDate());
+        invitationToInterviewForWorkEntity.setInvitation(invitationToInterviewForWorkDTO.getInvitation());
 
 
-        return invitationToInterviewEntity;
+        return invitationToInterviewForWorkEntity;
     }
 
 

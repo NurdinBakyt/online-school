@@ -1,6 +1,6 @@
 package org.nurdin.school.service.impl;
 
-import org.nurdin.school.entity.RejectionOfTheBidEntity;
+import org.nurdin.school.entity.RejectionOfTheBidForWorkEntity;
 import org.nurdin.school.repository.RejectionOfTheBidRepository;
 import org.nurdin.school.service.RejectionOfTheBidService;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ public class RejectionOfTheBidServiceImpl implements RejectionOfTheBidService {
 
 
     @Override
-    public RejectionOfTheBidEntity save(RejectionOfTheBidEntity rejectionOfTheBidEntity) {
-        return rejectionOfTheBidRepository.save(rejectionOfTheBidEntity);
+    public RejectionOfTheBidForWorkEntity save(RejectionOfTheBidForWorkEntity rejectionOfTheBidForWorkEntity) {
+        return rejectionOfTheBidRepository.save(rejectionOfTheBidForWorkEntity);
     }
 }

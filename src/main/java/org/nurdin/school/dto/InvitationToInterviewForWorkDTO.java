@@ -1,6 +1,6 @@
 package org.nurdin.school.dto;
 
-public class InvitationToInterviewDTO {
+public class InvitationToInterviewForWorkDTO {
     private String  invitation;
     private String  interviewDate;
 

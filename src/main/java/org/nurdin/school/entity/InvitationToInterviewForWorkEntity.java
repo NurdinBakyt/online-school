@@ -3,8 +3,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "invitation_to_interview")
-public class InvitationToInterviewEntity extends BaseEntity {
+@Table(name = "invitation_to_interview_for_work")
+public class InvitationToInterviewForWorkEntity extends BaseEntity {
     private String  invitation;
     private String  interviewDate;
 

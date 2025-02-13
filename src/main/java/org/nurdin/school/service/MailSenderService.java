@@ -1,7 +1,9 @@
 package org.nurdin.school.service;
 
-import org.nurdin.school.dto.InvitationToInterviewDTO;
-import org.nurdin.school.dto.RejectionOfTheBidDTO;
+import org.nurdin.school.dto.FormAcceptTheBidForStudyDTO;
+import org.nurdin.school.dto.FormRejectTheBidForStudyDTO;
+import org.nurdin.school.dto.InvitationToInterviewForWorkDTO;
+import org.nurdin.school.dto.RejectionOfTheBidForWorkDTO;
 import org.nurdin.school.entity.UserEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -27,11 +29,9 @@ public class MailSenderService {
         mailSender.send(mailMessage);
     }
 
-    public void sendMailToInterview (UserEntity user , InvitationToInterviewDTO invitationToInterviewDTO) {
-        String userName = user.getUsername();
-        String invitation = invitationToInterviewDTO.getInvitation();
-        String interviewDate = invitationToInterviewDTO.getInterviewDate();
-        String messageForUser = invitation + interviewDate;
+    public void sendMailToInterviewForWork(UserEntity user , InvitationToInterviewForWorkDTO invitationToInterviewForWorkDTO) {
+        String invitation = invitationToInterviewForWorkDTO.getInvitation();
+        String interviewDate = invitationToInterviewForWorkDTO.getInterviewDate();
 
         sendMail(
                 user.getEmail(),
@@ -40,10 +40,8 @@ public class MailSenderService {
         );
     }
 
-    public void sendMailToRejection (UserEntity user , RejectionOfTheBidDTO rejectionOfTheBidDTO) {
-        String userName = user.getUsername();
-        String mail = rejectionOfTheBidDTO.getMail();
-
+    public void sendMailToRejectionForWork(UserEntity user , RejectionOfTheBidForWorkDTO rejectionOfTheBidForWorkDTO) {
+        String mail = rejectionOfTheBidForWorkDTO.getMail();
 
         sendMail(
                 user.getEmail(),
@@ -51,5 +49,25 @@ public class MailSenderService {
                 mail
         );
     }
+
+    public void sendMailToInterviewForStudy(UserEntity user , FormAcceptTheBidForStudyDTO formAcceptTheBidForStudyDTO) {
+        String mail = formAcceptTheBidForStudyDTO.getMailForAcceptBid() + formAcceptTheBidForStudyDTO.getMeetingDate();
+
+        sendMail(
+                user.getEmail(),
+                user.getUsername(),
+                mail
+        );
+    }
+
+    public void sendMailToRejectBidForStudy(UserEntity user , FormRejectTheBidForStudyDTO formRejectTheBidForStudyDTO) {
+        sendMail(
+                user.getEmail(),
+                user.getUsername(),
+                formRejectTheBidForStudyDTO.getMailForRejectTheBid()
+        );
+    }
+
+
 
 }

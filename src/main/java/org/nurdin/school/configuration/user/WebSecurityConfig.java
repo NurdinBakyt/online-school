@@ -33,6 +33,9 @@ public class WebSecurityConfig {
                     System.out.println("configuring");
                     auth.requestMatchers("/api/v1/bidForWork/rejectTheBid").permitAll();//hasAnyAuthority("HEAD_TEACHER" ,"SECRETARY");
                     auth.requestMatchers("/api/v1/bidForWork/acceptBid").permitAll();//hasAnyAuthority("HEAD_TEACHER" ,"SECRETARY");
+                    auth.requestMatchers("/api/v1/bidForStudy/create").permitAll();
+                    auth.requestMatchers("/api/v1/bidForStudy/accept_bid_for_study").permitAll();
+                    auth.requestMatchers("/api/v1/bidForStudy/reject_bid_for_study").permitAll();
                     auth.requestMatchers("/api/v1/employee/createBidForWork").permitAll();
                     auth.requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll();
                     auth.requestMatchers("/api/v1/user/**").permitAll();

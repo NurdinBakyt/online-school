@@ -1,6 +1,6 @@
 package org.nurdin.school.dto;
 
-public class RejectionOfTheBidDTO {
+public class RejectionOfTheBidForWorkDTO {
     private String  mail;
 
     public String getMail() {
