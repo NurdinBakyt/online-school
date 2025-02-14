@@ -1,9 +1,13 @@
-package org.nurdin.school.dto;
+package org.nurdin.school.entity;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
-public class InvitationToInterviewDTO {
+@Entity
+@Table(name = "invitation_to_interview_for_work")
+public class InvitationToInterviewForWorkEntity extends BaseEntity {
     private String  invitation;
     private String  interviewDate;
-    private String  emailUser;
+
 
     public String getInvitation() {
         return invitation;
@@ -21,11 +25,5 @@ public class InvitationToInterviewDTO {
         this.interviewDate = interviewDate;
     }
 
-    public String getEmailUser() {
-        return emailUser;
-    }
-
-    public void setEmailUser(String emailUser) {
-        this.emailUser = emailUser;
-    }
+    
 }
