@@ -36,10 +36,11 @@ public class WebSecurityConfig {
                     auth.requestMatchers("/api/v1/employee/createBidForWork").permitAll();
                     auth.requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll();
                     auth.requestMatchers("/api/v1/user/**").permitAll();
-                    auth.requestMatchers("/api/v1/auth/**").permitAll();
+                    auth.requestMatchers("/api/v1/auth/user-roles").permitAll();
                     auth.requestMatchers("/api/v1/news/**").permitAll();
                     auth.requestMatchers("/api/v1/news/").permitAll();
                     auth.requestMatchers("/api/v1/bidForWork/getAllBids").hasAnyAuthority("HEAD_TEACHER", "SECRETARY");
+                    auth.requestMatchers("/api/v1/role/get-all-roles").permitAll();
                     auth.requestMatchers("/api/v1/bidForWork/acceptBid/", "/api/v1/bidForWork/rejectTheBid").
                             hasAnyAuthority("HEAD_TEACHER", "SECRETARY");
                     auth.requestMatchers("/api/v1/employee/createBidForWork").hasAuthority("EMPLOYEE");
@@ -59,6 +60,7 @@ public class WebSecurityConfig {
         configuration.setAllowedOrigins(Arrays.asList(
                 "http://localhost:3000",
                 "http://localhost:8080",
+                "https://391b-46-251-196-6.ngrok-free.app",
                 "https://a241-212-112-126-239.ngrok-free.app",
                 "https://a241-212-112-126-239.ngrok-free.app/swagger-ui/index.html",
                 "https://40d4-212-112-126-234.ngrok-free.app"

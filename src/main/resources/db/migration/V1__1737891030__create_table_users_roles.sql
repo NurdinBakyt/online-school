@@ -9,5 +9,5 @@ create table if not exists users(
 
 create table IF NOT EXISTS roles(
     id bigserial primary key,
-    title varchar unique not null
+    title varchar unique not null default 'USER'
 );
