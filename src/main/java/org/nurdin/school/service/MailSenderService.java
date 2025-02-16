@@ -1,5 +1,7 @@
 package org.nurdin.school.service;
 
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 import org.nurdin.school.dto.FormAcceptTheBidForStudyDTO;
 import org.nurdin.school.dto.FormRejectTheBidForStudyDTO;
 import org.nurdin.school.dto.InvitationToInterviewForWorkDTO;
@@ -7,10 +9,12 @@ import org.nurdin.school.dto.RejectionOfTheBidForWorkDTO;
 import org.nurdin.school.entity.UserEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
-@Service
+import java.util.regex.Pattern;
 
+@Service
 public class MailSenderService {
 
     private final JavaMailSender mailSender;
@@ -21,13 +25,27 @@ public class MailSenderService {
 
 
     public void sendMail(String to, String subject, String text) {
-        SimpleMailMessage mailMessage = new SimpleMailMessage();
-        mailMessage.setTo(to);
-        mailMessage.setSubject(subject);
-        mailMessage.setText(text);
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        Pattern emailPattern = Pattern.compile(emailRegex);
 
-        mailSender.send(mailMessage);
+        if (!emailPattern.matcher(to).matches()) {
+            throw new IllegalArgumentException("Invalid email format");
+        }
+
+        try {
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true,"UTF-8");
+
+            helper.setTo(to);
+            helper.setSubject(subject);
+            helper.setText(text, true);
+
+            mailSender.send(message);
+        } catch (MessagingException e) {
+            throw new RuntimeException("Ошибка при отправке email: " + e.getMessage(), e);
+        }
     }
+
 
     public void sendMailToInterviewForWork(UserEntity user , InvitationToInterviewForWorkDTO invitationToInterviewForWorkDTO) {
         String invitation = invitationToInterviewForWorkDTO.getInvitation();
@@ -67,7 +85,4 @@ public class MailSenderService {
                 formRejectTheBidForStudyDTO.getMailForRejectTheBid()
         );
     }
-
-
-
 }
