@@ -1,15 +1,15 @@
 package org.nurdin.school.dto;
 
 public class LoginDTO {
-    private String email;
+    private String identifier;
     private String password;
 
-    public String getEmail() {
-        return email;
+    public String getIdentifier() {
+        return identifier;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
     }
 
     public String getPassword() {

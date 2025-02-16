@@ -26,9 +26,11 @@ public class JwtAuthConfig {
 
     @Bean
     UserDetailsService userDetailsService() {
-        return username -> userRepository.findByEmail(username)
+        return usernameOrEmail -> userRepository.findByEmail(usernameOrEmail)
+                .or(() -> userRepository.findByUsername(usernameOrEmail)) // Используем or(), а не orElseGet()
                 .orElseThrow(() -> new UserNotFoundException("Пользователь не найден"));
     }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

@@ -6,6 +6,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.apache.catalina.User;
+import org.nurdin.school.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -38,23 +39,32 @@ public class JwtService {
         Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);
     }
-    public String generateToken(UserDetails userDetails) {
+
+    public String generateRefreshToken(Map<String,Object> extraClaims,UserEntity userDetails) {
+        return buildToken(extraClaims,userDetails,refreshTokenExpire);
+    }
+
+    public String generateToken(UserEntity userDetails) {
          return generateToken(new HashMap<>(),userDetails);
     }
-    public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
+
+    public String generateToken(Map<String, Object> extraClaims, UserEntity userDetails) {
         return buildToken(extraClaims,userDetails,accessTokenExpire);
     }
     public Long getExpirationTime(){
         return accessTokenExpire;
     }
+
     public String buildToken(
             Map<String,Object> extraClaims,
-            UserDetails userDetails,
+            UserEntity userEntity,
             Long accessTokenExpire
     ){
+        String subject = userEntity.getUsername();
+
         return Jwts.builder()
                 .claims(extraClaims)
-                .subject(userDetails.getUsername())
+                .subject(subject)
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis()+ accessTokenExpire))
                 .signWith(key(),SignatureAlgorithm.HS256)
