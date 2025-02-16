@@ -13,7 +13,7 @@ services:
       - db
   db:
     container_name: db
-    image: postgres:17-alpine
+    image: postgres:17
     environment:
       - POSTGRES_DB=school
       - POSTGRES_USER=dbuser

@@ -38,6 +38,7 @@ public class WebSecurityConfig {
                     auth.requestMatchers("/api/v1/user/**").permitAll();
                     auth.requestMatchers("/api/v1/auth/**").permitAll();
                     auth.requestMatchers("/api/v1/news/**").permitAll();
+                    auth.requestMatchers("/api/v1/user/get-all-users").permitAll();
                     auth.requestMatchers("/api/v1/news/").permitAll();
                     auth.requestMatchers("/api/v1/bidForWork/getAllBids").hasAnyAuthority("HEAD_TEACHER", "SECRETARY");
                     auth.requestMatchers("/api/v1/bidForWork/acceptBid/", "/api/v1/bidForWork/rejectTheBid").
