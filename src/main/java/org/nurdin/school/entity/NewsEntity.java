@@ -16,40 +16,45 @@ public class NewsEntity extends BaseEntity {
     @Column(name = "content", nullable = false, columnDefinition = "TEXT")
     private String content;
 
-    private String imageName;
-    private String imageType;
+    // private String imageName;
+    // private String imageType;
 
-    @Lob
-    private byte[] imageDate;
+    // @Lob
+    // private byte[] imageDate;
 
     @Column(name = "date", nullable = false)
     private LocalDateTime date;
 
     public NewsEntity() {}
 
-    public void setImageDate(byte[] imageDate) {
-        this.imageDate = imageDate;
+    @PrePersist
+    protected void onCreate() {
+        this.date = LocalDateTime.now();
     }
 
-    public byte[] getImageDate() {
-        return imageDate;
-    }
+    // public void setImageDate(byte[] imageDate) {
+    //     this.imageDate = imageDate;
+    // }
 
-    public void setImageName(String imageName) {
-        this.imageName = imageName;
-    }
+    // public byte[] getImageDate() {
+    //     return imageDate;
+    // }
 
-    public String getImageName() {
-        return imageName;
-    }
+    // public void setImageName(String imageName) {
+    //     this.imageName = imageName;
+    // }
 
-    public void setImageType(String imageType) {
-        this.imageType = imageType;
-    }
+    // public String getImageName() {
+    //     return imageName;
+    // }
 
-    public String getImageType() {
-        return imageType;
-    }
+    // public void setImageType(String imageType) {
+    //     this.imageType = imageType;
+    // }
+
+    // public String getImageType() {
+    //     return imageType;
+    // }
 
     public Long getId() {
         return id;

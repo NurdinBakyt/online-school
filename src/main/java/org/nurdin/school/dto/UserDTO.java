@@ -1,25 +1,45 @@
 package org.nurdin.school.dto;
 
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
-import org.nurdin.school.entity.BaseEntity;
+import jakarta.validation.constraints.NotBlank;
 import org.nurdin.school.enums.UserStatus;
 
 import java.time.LocalDateTime;
 import java.util.Set;
-@Schema(description = "ДТОшки пользователей со всеми его полями ")
+
+@Schema(description = "ДТО для пользователей со всеми его полями")
 public class UserDTO {
     private Long id;
+    @NotBlank
     private String email;
-    @JsonProperty("username")
+    @NotBlank
     private String username;
+    @NotBlank
     private String password;
     private Set<RoleDTO> roles;
     private UserStatus userStatus;
-    @Schema(description = "Нужен для указания даты когда был создан пользователь")
+
+    @Schema(description = "Дата создания пользователя")
     private LocalDateTime createdAt;
 
+    // Геттеры и сеттеры
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public String getUsername() {
         return username;
@@ -27,21 +47,6 @@ public class UserDTO {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt() {
-        this.createdAt = LocalDateTime.now();
-    }
-
-    public UserStatus getUserStatus() {
-        return userStatus;
-    }
-    public void setUserStatus(UserStatus userStatus) {
-        this.userStatus = userStatus;
     }
 
     public String getPassword() {
@@ -60,31 +65,33 @@ public class UserDTO {
         this.roles = roles;
     }
 
-    public String getEmail() {
-        return email;
+    public UserStatus getUserStatus() {
+        return userStatus;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUserStatus(UserStatus userStatus) {
+        this.userStatus = userStatus;
     }
 
-    public Long getId() {
-        return id;
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setCreatedAt() {
+        this.createdAt = LocalDateTime.now();
     }
+
 
     @Override
     public String toString() {
         return "UserDTO{" +
-                "email='" + email + '\'' +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", roles=" + roles +
                 ", userStatus=" + userStatus +
-                ", localDateTime=" + createdAt +
-                ", id=" + id +
+                ", createdAt=" + createdAt +
                 '}';
     }
 }

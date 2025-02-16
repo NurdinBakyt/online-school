@@ -1,6 +1,5 @@
 package org.nurdin.school.dto.response;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.nurdin.school.dto.RoleDTO;
 import org.nurdin.school.enums.UserStatus;
@@ -12,13 +11,13 @@ import java.util.Set;
 public class UserDtoResponse {
     private Long id;
     private String email;
-    @JsonProperty("username")
     private String username;
     private Set<RoleDTO> roles;
     @Schema(description = "дата добавления")
     private LocalDateTime createdAt;
     @Schema(description = "это текущий статус аккаунта пользователя, активный, удалённый или заблокированный")
     private UserStatus userStatus;
+    private boolean enabled;
 
     // Конструктор с параметрами
     public UserDtoResponse(Long id, Set<RoleDTO> roles) {
@@ -31,6 +30,18 @@ public class UserDtoResponse {
     }
 
     public UserDtoResponse(Long id, String roleTitle) {
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public Long getId() {
