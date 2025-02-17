@@ -5,8 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "rejection_of_the_bid_entity")
-public class RejectionOfTheBidEntity extends BaseEntity {
+@Table(name = "rejection_of_the_bid_for_work_entity")
+public class RejectionOfTheBidForWorkEntity extends BaseEntity {
 
     @Column(name = "email")
     private String  mail;

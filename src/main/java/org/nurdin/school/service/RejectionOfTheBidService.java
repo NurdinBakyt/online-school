@@ -1,9 +1,9 @@
 package org.nurdin.school.service;
 
-import org.nurdin.school.entity.RejectionOfTheBidEntity;
+import org.nurdin.school.entity.RejectionOfTheBidForWorkEntity;
 
 
 public interface RejectionOfTheBidService  {
-    RejectionOfTheBidEntity save (RejectionOfTheBidEntity rejectionOfTheBidEntity);
+    RejectionOfTheBidForWorkEntity save (RejectionOfTheBidForWorkEntity rejectionOfTheBidForWorkEntity);
 
 }
