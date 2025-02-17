@@ -1,12 +1,13 @@
 package org.nurdin.school.service;
 
 import org.nurdin.school.entity.UserEntity;
+import org.nurdin.school.exceptions.UserExistsException;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
-    UserEntity register(UserEntity user);
+    UserEntity register(UserEntity user) ;
     Optional<UserEntity> findById(Long id);
     UserEntity findByUsername(String username);
     UserEntity findByEmail(String email);

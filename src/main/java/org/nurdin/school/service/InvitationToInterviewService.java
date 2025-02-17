@@ -1,8 +1,8 @@
 package org.nurdin.school.service;
 
-import org.nurdin.school.entity.InvitationToInterviewEntity;
+import org.nurdin.school.entity.InvitationToInterviewForWorkEntity;
 
 public interface InvitationToInterviewService {
-    InvitationToInterviewEntity save(InvitationToInterviewEntity invitationToInterviewEntity);
+    InvitationToInterviewForWorkEntity save(InvitationToInterviewForWorkEntity invitationToInterviewForWorkEntity);
 
 }

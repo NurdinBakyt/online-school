@@ -1,5 +1,6 @@
 package org.nurdin.school.service.impl;
 
+import org.nurdin.school.exceptions.UserNotFoundException;
 import org.springframework.data.domain.Page;
 import org.nurdin.school.dto.NewsDto;
 import org.nurdin.school.dto.RoleDTO;
@@ -43,7 +44,8 @@ public class NewsServiceImpl implements NewsService {
 
     @Override
     public NewsEntity addNews(NewsCreateDTO newsDto, MultipartFile imageFile) throws IOException {
-        UserEntity author = userRepository.findByUsername(newsDto.getUsername());
+        UserEntity author = userRepository.findByUsername(newsDto.getUsername())
+                .orElseThrow(() -> new UserNotFoundException("Пользователь не найден"));
         NewsEntity news = newsDtoMapper.newsСreateDTOToEntity(newsDto, author);
         // news.setImageName(imageFile.getOriginalFilename());
         // news.setImageType(imageFile.getContentType());
@@ -53,7 +55,8 @@ public class NewsServiceImpl implements NewsService {
 
     @Override
     public NewsEntity addNewsNotImage(NewsCreateDTO newsDto) {
-        UserEntity author = userRepository.findByUsername(newsDto.getUsername());
+        UserEntity author = userRepository.findByUsername(newsDto.getUsername())
+                .orElseThrow(() -> new UserNotFoundException("Пользователь не найден"));
         NewsEntity news = newsDtoMapper.newsСreateDTOToEntity(newsDto, author);
         return newsRepository.save(news);
     }

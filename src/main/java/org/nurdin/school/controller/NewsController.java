@@ -39,9 +39,9 @@ public class NewsController {
         } catch(Exception e) {
             throw new NewNotFoundException(e.getMessage());
         }
-        
+
     }
-    
+
     @GetMapping("/detAllNews")
     public List<NewsDto> getAllNews(
         @RequestParam(
