@@ -1,4 +1,4 @@
-create table m2m_users_roles  (
+create table if not exists m2m_users_roles  (
                                  user_id INT NOT NULL,
                                  role_id INT NOT NULL,
                                  PRIMARY KEY (user_id, role_id),

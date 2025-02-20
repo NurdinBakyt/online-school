@@ -3,44 +3,15 @@ package org.nurdin.school.dto;
 import org.nurdin.school.enums.StatusOfBid;
 
 public class BidForWorkDTO {
-
-    private Long id;
-    private String info_of_employee;
-    private String documents_of_employee;
-    private StatusOfBid bid_status;
+    private String resume;
+    private String passport;
+    private StatusOfBid bidStatus;
+    private String name;
+    private String surname;
+    private String patronymic;
+    private Integer age;
+    private String phoneNumber;
     private String email;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getInfo_of_employee() {
-        return info_of_employee;
-    }
-
-    public void setInfo_of_employee(String info_of_employee) {
-        this.info_of_employee = info_of_employee;
-    }
-
-    public String getDocuments_of_employee() {
-        return documents_of_employee;
-    }
-
-    public void setDocuments_of_employee(String documents_of_employee) {
-        this.documents_of_employee = documents_of_employee;
-    }
-
-    public StatusOfBid getBid_status() {
-        return bid_status;
-    }
-
-    public void setBid_status(StatusOfBid bid_status) {
-        this.bid_status = bid_status;
-    }
 
     public String getEmail() {
         return email;
@@ -48,5 +19,69 @@ public class BidForWorkDTO {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getResume() {
+        return resume;
+    }
+
+    public void setResume(String resume) {
+        this.resume = resume;
+    }
+
+    public String getPassport() {
+        return passport;
+    }
+
+    public void setPassport(String passport) {
+        this.passport = passport;
+    }
+
+    public StatusOfBid getBidStatus() {
+        return bidStatus;
+    }
+
+    public void setBidStatus(StatusOfBid bidStatus) {
+        this.bidStatus = bidStatus;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getPatronymic() {
+        return patronymic;
+    }
+
+    public void setPatronymic(String patronymic) {
+        this.patronymic = patronymic;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }

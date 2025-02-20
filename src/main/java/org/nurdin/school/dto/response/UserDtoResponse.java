@@ -17,6 +17,7 @@ public class UserDtoResponse {
     private LocalDateTime createdAt;
     @Schema(description = "это текущий статус аккаунта пользователя, активный, удалённый или заблокированный")
     private UserStatus userStatus;
+    private boolean enabled;
 
     // Конструктор с параметрами
     public UserDtoResponse(Long id, Set<RoleDTO> roles) {
@@ -29,6 +30,18 @@ public class UserDtoResponse {
     }
 
     public UserDtoResponse(Long id, String roleTitle) {
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public Long getId() {
@@ -47,20 +60,20 @@ public class UserDtoResponse {
         this.email = email;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public Set<RoleDTO> getRoles() {
         return roles;
     }
 
     public void setRoles(Set<RoleDTO> roles) {
         this.roles = roles;
-    }
-
-    public String getUserName() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public LocalDateTime getCreatedAt() {

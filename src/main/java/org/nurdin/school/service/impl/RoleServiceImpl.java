@@ -2,6 +2,7 @@ package org.nurdin.school.service.impl;
 
 import jakarta.transaction.Transactional;
 import org.nurdin.school.entity.RoleEntity;
+import org.nurdin.school.entity.UserEntity;
 import org.nurdin.school.exceptions.RoleNotFoundException;
 import org.nurdin.school.exceptions.UserNotFoundException;
 import org.nurdin.school.repository.RoleRepository;
@@ -65,19 +66,16 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    public void deleteByTitle(Long user_id,String roleName) {
+        roleRepository.deleteRoleFromUserByTitle(user_id,roleName);
+    }
+
+    @Override
     public void deleteByRoleId(Long roleId) {
         if (!roleRepository.existsById(roleId)) {
             throw new RoleNotFoundException("Роль не найдена");
         }
         roleRepository.deleteById(roleId);
-    }
-
-    @Override
-    public void deleteByRoleTitle(String roleTitle) {
-        if (!roleRepository.existsByTitle(roleTitle)) {
-            throw new RoleNotFoundException("Роль не найдена");
-        }
-        roleRepository.deleteByTitle(roleTitle);
     }
 
     @Override
