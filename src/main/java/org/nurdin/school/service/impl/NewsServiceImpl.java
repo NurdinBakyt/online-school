@@ -1,8 +1,12 @@
 package org.nurdin.school.service.impl;
 
+import io.minio.errors.*;
+import lombok.SneakyThrows;
+import org.nurdin.school.dto.news.NewsImage;
 import org.nurdin.school.exceptions.UserNotFoundException;
+import org.nurdin.school.service.ImageService;
 import org.springframework.data.domain.Page;
-import org.nurdin.school.dto.NewsDto;
+import org.nurdin.school.dto.news.NewsDto;
 import org.nurdin.school.dto.RoleDTO;
 import org.nurdin.school.dto.request.NewsCreateDTO;
 import org.nurdin.school.dto.request.NewsUpdateDTO;
@@ -12,13 +16,15 @@ import org.nurdin.school.entity.UserEntity;
 import org.nurdin.school.repository.NewsRepository;
 import org.nurdin.school.repository.UserRepository;
 import org.nurdin.school.service.NewsService;
-import org.nurdin.school.util.NewsDtoMapper;
+import org.nurdin.school.util.mappers.NewsDtoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -30,22 +36,23 @@ public class NewsServiceImpl implements NewsService {
     private final UserRepository userRepository;
     private final NewsRepository newsRepository;
     private final NewsDtoMapper newsDtoMapper;
+    private final ImageService imageService;
 
-    @Autowired
     public NewsServiceImpl(
         NewsRepository newsRepository,
         UserRepository userRepository,
-        NewsDtoMapper newsDtoMapper
+        NewsDtoMapper newsDtoMapper, ImageService imageService
     ) {
         this.userRepository = userRepository;
         this.newsRepository = newsRepository;
         this.newsDtoMapper = newsDtoMapper;
+        this.imageService = imageService;
     }
 
     @Override
     public NewsEntity addNews(NewsCreateDTO newsDto, MultipartFile imageFile) throws IOException {
         UserEntity author = userRepository.findByUsername(newsDto.getUsername())
-                .orElseThrow(() -> new UserNotFoundException("Пользователь не найден"));
+            .orElseThrow(() -> new UserNotFoundException("Пользователь не найден"));
         NewsEntity news = newsDtoMapper.newsСreateDTOToEntity(newsDto, author);
         // news.setImageName(imageFile.getOriginalFilename());
         // news.setImageType(imageFile.getContentType());
@@ -56,7 +63,7 @@ public class NewsServiceImpl implements NewsService {
     @Override
     public NewsEntity addNewsNotImage(NewsCreateDTO newsDto) {
         UserEntity author = userRepository.findByUsername(newsDto.getUsername())
-                .orElseThrow(() -> new UserNotFoundException("Пользователь не найден"));
+            .orElseThrow(() -> new UserNotFoundException("Пользователь не найден"));
         NewsEntity news = newsDtoMapper.newsСreateDTOToEntity(newsDto, author);
         return newsRepository.save(news);
     }
@@ -120,5 +127,14 @@ public class NewsServiceImpl implements NewsService {
             throw new RuntimeException("News not found with id: " + id);
         }
         newsRepository.deleteById(newsId);
+    }
+
+    @Override
+    public void uploadImage(Long id, NewsImage newsImage) {
+        NewsEntity news = newsRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("News not found with id: " + id));
+        String fileName = imageService.upload(newsImage);
+        news.getImages().add(fileName);
+        newsRepository.save(news);
     }
 }

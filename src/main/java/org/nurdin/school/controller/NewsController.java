@@ -1,16 +1,21 @@
 package org.nurdin.school.controller;
 
-import org.nurdin.school.dto.NewsDto;
+import io.swagger.v3.oas.annotations.Operation;
+import org.nurdin.school.dto.news.NewsDto;
+import org.nurdin.school.dto.news.NewsImage;
+import org.nurdin.school.dto.news.NewsImageDTO;
 import org.nurdin.school.dto.request.NewsCreateDTO;
 import org.nurdin.school.dto.request.NewsUpdateDTO;
 import org.nurdin.school.entity.NewsEntity;
 import org.nurdin.school.exceptions.NewNotFoundException;
 import org.nurdin.school.service.NewsService;
+import org.nurdin.school.util.mappers.NewsDtoMapper;
+import org.nurdin.school.util.mappers.NewsImageMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.net.URI;
 import java.util.List;
@@ -20,10 +25,14 @@ import java.util.List;
 public class NewsController {
 
     private final NewsService newsService;
+    private final NewsDtoMapper newsDtoMapper;
+    private final NewsImageMapper newsImageMapper;
 
     @Autowired
-    public NewsController(NewsService newsService) {
+    public NewsController(NewsService newsService, NewsDtoMapper newsDtoMapper, NewsImageMapper newsImageMapper) {
         this.newsService = newsService;
+        this.newsDtoMapper = newsDtoMapper;
+        this.newsImageMapper = newsImageMapper;
     }
 
     // @PreAuthorize("hasAnyAuthority(\"DIRECTOR\", \"SECRETARY\", \"HEAD_TEACHER\")")
@@ -92,4 +101,12 @@ public class NewsController {
             throw new NewNotFoundException(e.getMessage());
         }
     }
+   @PostMapping("{id}/image")
+   @Operation(method = "enpoint который добавляет картинки,в сущность новостей,в массив images")
+   public ResponseEntity<?> addImage(@PathVariable Long id,
+                                     @Validated @ModelAttribute NewsImageDTO newsDto) {
+       NewsImage newsImage = newsImageMapper.toEntity(newsDto);
+       newsService.uploadImage(id,newsImage);
+       return ResponseEntity.ok("Картрика успешно сохранена");
+   }
 }

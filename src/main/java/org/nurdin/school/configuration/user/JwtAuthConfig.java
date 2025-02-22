@@ -27,8 +27,8 @@ public class JwtAuthConfig {
     @Bean
     UserDetailsService userDetailsService() {
         return usernameOrEmail -> userRepository.findByEmail(usernameOrEmail)
-                .or(() -> userRepository.findByUsername(usernameOrEmail)) // Используем or(), а не orElseGet()
-                .orElseThrow(() -> new UserNotFoundException("Пользователь не найден"));
+            .or(() -> userRepository.findByUsername(usernameOrEmail))
+            .orElseThrow(() -> new UserNotFoundException("Пользователь не найден: " + usernameOrEmail));
     }
 
     @Bean
@@ -40,11 +40,10 @@ public class JwtAuthConfig {
         return authenticationConfiguration.getAuthenticationManager();
     }
     @Bean
-    AuthenticationProvider authenticationProvider(){
+    AuthenticationProvider authenticationProvider(UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-        daoAuthenticationProvider.setUserDetailsService(userDetailsService());
-        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
+        daoAuthenticationProvider.setUserDetailsService(userDetailsService);
+        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder);
         return daoAuthenticationProvider;
     }
-
 }

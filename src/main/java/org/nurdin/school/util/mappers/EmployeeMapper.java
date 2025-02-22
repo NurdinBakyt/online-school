@@ -1,8 +1,6 @@
-package org.nurdin.school.util;
+package org.nurdin.school.util.mappers;
 
-import org.nurdin.school.dto.DirectorDTO;
 import org.nurdin.school.dto.EmployeeDTO;
-import org.nurdin.school.entity.DirectorEntity;
 import org.nurdin.school.entity.EmployeeEntity;
 
 public class EmployeeMapper {

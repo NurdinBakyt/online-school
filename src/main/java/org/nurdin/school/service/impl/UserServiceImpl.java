@@ -1,10 +1,8 @@
 package org.nurdin.school.service.impl;
 
-import jakarta.transaction.Transactional;
 import org.nurdin.school.entity.RoleEntity;
 import org.nurdin.school.entity.UserEntity;
 import org.nurdin.school.exceptions.RoleNotFoundException;
-import org.nurdin.school.exceptions.UserExistsException;
 import org.nurdin.school.exceptions.UserNotFoundException;
 import org.nurdin.school.repository.RoleRepository;
 import org.nurdin.school.repository.UserRepository;
@@ -14,8 +12,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 

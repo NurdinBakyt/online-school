@@ -1,18 +1,16 @@
 package org.nurdin.school.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import org.nurdin.school.dto.UserDTO;
 import org.nurdin.school.dto.response.UserDtoResponse;
 import org.nurdin.school.entity.RoleEntity;
 import org.nurdin.school.entity.UserEntity;
 import org.nurdin.school.exceptions.RoleNotFoundException;
-import org.nurdin.school.exceptions.UserExistsException;
 import org.nurdin.school.exceptions.UserNotFoundException;
 import org.nurdin.school.repository.RoleRepository;
 import org.nurdin.school.service.RoleService;
 import org.nurdin.school.service.UserService;
-import org.nurdin.school.util.UserDTOMapper;
+import org.nurdin.school.util.mappers.UserDTOMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;

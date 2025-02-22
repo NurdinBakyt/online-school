@@ -8,9 +8,9 @@ import org.nurdin.school.entity.BidForStudyEntity;
 import org.nurdin.school.entity.UserEntity;
 import org.nurdin.school.enums.StatusOfBid;
 import org.nurdin.school.service.*;
-import org.nurdin.school.util.BidForStudyMapper;
-import org.nurdin.school.util.FormAcceptTheBidMapper;
-import org.nurdin.school.util.FormRejectTheBidForStudyMapper;
+import org.nurdin.school.util.mappers.BidForStudyMapper;
+import org.nurdin.school.util.mappers.FormAcceptTheBidMapper;
+import org.nurdin.school.util.mappers.FormRejectTheBidForStudyMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

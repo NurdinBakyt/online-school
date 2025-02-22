@@ -1,4 +1,4 @@
-package org.nurdin.school.util;
+package org.nurdin.school.util.mappers;
 
 import org.nurdin.school.dto.RoleDTO;
 import org.nurdin.school.dto.UserDTO;
@@ -7,7 +7,6 @@ import org.nurdin.school.entity.RoleEntity;
 import org.nurdin.school.entity.UserEntity;
 import org.springframework.stereotype.Component;
 
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -73,5 +72,18 @@ public class UserDTOMapper {
         userDtoResponse.setEnabled(userEntity.isEnabled());
         userDtoResponse.setCreatedAt();
         return userDtoResponse;
+    }
+    public static UserEntity responseToEntity(UserDtoResponse userDtoResponse) {
+        UserEntity userEntity = new UserEntity();
+        userEntity.setId(userDtoResponse.getId());
+        userEntity.setUsername(userDtoResponse.getUsername());
+        userEntity.setEmail(userDtoResponse.getEmail());
+        userDtoResponse.setEnabled(userDtoResponse.isEnabled());
+        userDtoResponse.setRoles(userDtoResponse.getRoles().stream()
+            .map(role -> new RoleDTO(role.getId(),role.getTitle()))
+            .collect(Collectors.toSet()));
+        userDtoResponse.setUserStatus(userDtoResponse.getUserStatus());
+        userDtoResponse.setCreatedAt();
+        return userEntity;
     }
 }

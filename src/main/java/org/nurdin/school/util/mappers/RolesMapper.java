@@ -1,13 +1,11 @@
-package org.nurdin.school.util;
+package org.nurdin.school.util.mappers;
 
 import org.nurdin.school.dto.RoleDTO;
 import org.nurdin.school.entity.RoleEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Component
 public class RolesMapper {

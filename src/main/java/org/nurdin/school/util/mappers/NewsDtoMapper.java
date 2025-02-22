@@ -1,6 +1,6 @@
-package org.nurdin.school.util;
+package org.nurdin.school.util.mappers;
 
-import org.nurdin.school.dto.NewsDto;
+import org.nurdin.school.dto.news.NewsDto;
 import org.nurdin.school.dto.request.NewsCreateDTO;
 import org.nurdin.school.dto.request.NewsUpdateDTO;
 import org.nurdin.school.dto.response.NewsDtoResponse;
