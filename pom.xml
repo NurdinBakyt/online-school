@@ -2,129 +2,56 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.4.1</version>
-        <relativePath/> <!-- lookup parent from repository -->
-    </parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.4.3</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+
+
     <groupId>org.nurdin</groupId>
     <artifactId>school</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+
+    <!--В Maven для модульных проектов (multi-module projects) родительский (корневой)
+    проект должен иметь упаковку pom-->
+
+    <!--Корневой pom.xml в проекте-агрегаторе служит только для управления зависимостями и
+    модулями, но сам не компилирует код и не создает JAR или WAR-файл. Он просто объединяет
+    несколько подмодулей.-->
+
+    <!--Поэтому упаковка (<packaging>) для него должна быть pom, а не jar или war.-->
+    <packaging>pom</packaging>
+
     <name>school</name>
     <description>school</description>
-    <url/>
-    <licenses>
-        <license/>
-    </licenses>
-    <developers>
-        <developer/>
-    </developers>
-    <scm>
-        <connection/>
-        <developerConnection/>
-        <tag/>
-        <url/>
-    </scm>
+
     <properties>
         <java.version>17</java.version>
     </properties>
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-            <version>2.0.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-            <version>3.3.4</version>
-        </dependency>
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.flywaydb</groupId>
-            <artifactId>flyway-database-postgresql</artifactId>
-            <version>10.14.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-mail</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.hibernate.orm</groupId>
-            <artifactId>hibernate-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-validation</artifactId>
-        </dependency>
-<!--        JWT-->
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-impl</artifactId>
-            <version>0.12.3</version>
-            <scope>runtime</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-api</artifactId>
-            <version>0.12.3</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-jackson</artifactId>
-            <version>0.12.3</version>
-            <scope>runtime</scope>
-        </dependency>
-<!--        TEST-->
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>5.9.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.9.2</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-params</artifactId>
-            <version>5.9.2</version>
-        </dependency>
-    </dependencies>
 
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
+    <modules>
+        <module>authorization</module>
+        <module>news</module>
+    </modules>
 
-
+    <!--<dependencyManagement> в Maven используется для централизованного
+    управления версиями зависимостей в многомодульных (multi-module) проектах.
+    Он позволяет объявить зависимости с фиксированными версиями в родительском pom.xml,
+    чтобы в дочерних модулях (authorization, news и т. д.)
+    можно было подключать эти зависимости без явного указания версии.-->
+    <dependencyManagement>
+        <dependencies>
+            <!--Это нужно чтобы другие модули например authorization ввидели классы в модуле news-->
+            <dependency>
+                <groupId>org.school</groupId>
+                <artifactId>news</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>
