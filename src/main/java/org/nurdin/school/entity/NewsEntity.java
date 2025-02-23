@@ -17,8 +17,12 @@ public class NewsEntity extends BaseEntity {
     @Column(name = "content", nullable = false, columnDefinition = "TEXT")
     private String content;
 
-    @Column(name = "images")
     @ElementCollection
+    @CollectionTable(
+        name = "news_images",
+        joinColumns = @JoinColumn(name = "news_id")
+    )
+    @Column(name = "image")
     private List<String> images;
 
     @Column(name = "date", nullable = false)

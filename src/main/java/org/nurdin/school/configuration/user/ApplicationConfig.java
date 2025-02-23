@@ -1,23 +1,27 @@
 package org.nurdin.school.configuration.user;
 
 import io.minio.MinioClient;
-import org.nurdin.school.service.props.MinioProperties;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class ApplicationConfig  {
-    private final MinioProperties minioProperties;
+public class ApplicationConfig {
+    @Value("${minio.url}")
+    private String url;
 
-    public ApplicationConfig(MinioProperties minioProperties) {
-        this.minioProperties = minioProperties;
-    }
+    @Value("${minio.accessKey}")
+    private String accessKey;
+
+    @Value("${minio.secretKey}")
+    private String secretKey;
+
 
     @Bean
-    public MinioClient minioClient(){
+    public MinioClient minioClient() {
         return MinioClient.builder()
-            .endpoint(minioProperties.getUrl())
-            .credentials(minioProperties.getAccessKey(), minioProperties.getSecretKey())
+            .endpoint(url)
+            .credentials(accessKey, secretKey)
             .build();
     }
 }

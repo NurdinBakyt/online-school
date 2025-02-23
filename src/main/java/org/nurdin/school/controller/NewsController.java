@@ -102,7 +102,7 @@ public class NewsController {
         }
     }
    @PostMapping("{id}/image")
-   @Operation(method = "enpoint который добавляет картинки,в сущность новостей,в массив images")
+   @Operation(method = "enpoint который добавляет картинки,в сущность новостей,в массив images",description = "enpoint который добавляет картинки,в сущность новостей,в массив images")
    public ResponseEntity<?> addImage(@PathVariable Long id,
                                      @Validated @ModelAttribute NewsImageDTO newsDto) {
        NewsImage newsImage = newsImageMapper.toEntity(newsDto);

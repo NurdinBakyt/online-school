@@ -1,14 +1,10 @@
 package org.nurdin.school.service.impl;
 
-import io.minio.BucketExistsArgs;
-import io.minio.MakeBucketArgs;
-import io.minio.MinioClient;
-import io.minio.PutObjectArgs;
+import io.minio.*;
 import io.minio.errors.*;
-import lombok.SneakyThrows;
 import org.nurdin.school.dto.news.NewsImage;
 import org.nurdin.school.service.ImageService;
-import org.nurdin.school.service.props.MinioProperties;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,21 +17,18 @@ import java.util.UUID;
 @Service
 public class ImageServiceImpl implements ImageService {
     private final MinioClient minioClient;
-    private final MinioProperties minioProperties;
+    private final String bucketName;
 
-    public ImageServiceImpl(MinioClient minioClient, MinioProperties minioProperties) {
+    public ImageServiceImpl(MinioClient minioClient, @Value("${minio.bucket}") String bucketName) {
         this.minioClient = minioClient;
-        this.minioProperties = minioProperties;
+        this.bucketName = bucketName;
     }
 
     @Override
     public String upload(NewsImage newsImage) {
         try {
             this.createBucket();
-        } catch (RuntimeException | ServerException | InsufficientDataException |
-                 ErrorResponseException | IOException | NoSuchAlgorithmException |
-                 InvalidKeyException | InvalidResponseException | XmlParserException |
-                 InternalException e) {
+        } catch (RuntimeException e) {
             throw new RuntimeException("Ошибка при создании бакета: " + e.getMessage(), e);
         }
 
@@ -54,8 +47,6 @@ public class ImageServiceImpl implements ImageService {
         return fileName;
     }
 
-
-
     private String generateFileName(MultipartFile multipartFile) {
         String extension = getExtension(multipartFile);
         return UUID.randomUUID() + "." + extension;
@@ -69,22 +60,31 @@ public class ImageServiceImpl implements ImageService {
         return originalFilename.substring(originalFilename.lastIndexOf(".") + 1);
     }
 
-    private void createBucket() throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
-        boolean found = minioClient.bucketExists(BucketExistsArgs.builder()
-            .bucket(minioProperties.getBucket())
-            .build());
-        if (!found) {
-            minioClient.makeBucket(MakeBucketArgs.builder()
-                .bucket(minioProperties.getBucket())
+    private void createBucket() {
+        try {
+            boolean found = minioClient.bucketExists(BucketExistsArgs.builder()
+                .bucket(bucketName)
                 .build());
+            if (!found) {
+                System.out.println("Бакета нету создаем новый бакет");
+                minioClient.makeBucket(MakeBucketArgs.builder()
+                    .bucket(bucketName)
+                    .build());
+
+            }else{
+                System.out.println("Бакет уже есть");
+            }
+        } catch (ServerException | InsufficientDataException | ErrorResponseException |
+                 IOException | NoSuchAlgorithmException | InvalidKeyException |
+                 InvalidResponseException | XmlParserException | InternalException e) {
+            throw new RuntimeException(e + "Ошибки при создании bucket create");
         }
     }
-
 
     private void saveImage(InputStream inputStream, String fileName) throws IOException, ServerException, InsufficientDataException, ErrorResponseException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
         minioClient.putObject(PutObjectArgs.builder()
             .stream(inputStream, inputStream.available(), -1)
-            .bucket(minioProperties.getBucket())
+            .bucket(bucketName)
             .object(fileName)
             .build());
     }

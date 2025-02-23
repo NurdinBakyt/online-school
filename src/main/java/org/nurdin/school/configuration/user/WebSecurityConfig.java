@@ -56,6 +56,7 @@ public class WebSecurityConfig {
                     auth.requestMatchers("/api/v1/auth/login").permitAll();
                     auth.requestMatchers("/api/v1/auth/verify").permitAll();
                     auth.requestMatchers("/api/v1/auth/resend").permitAll();
+                    auth.requestMatchers("/api/v1/news/**/image").permitAll();
                     auth.requestMatchers("/api/v1/auth/refresh").permitAll();
                     auth.anyRequest().authenticated();
                 })
