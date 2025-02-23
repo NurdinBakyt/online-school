@@ -1,8 +1,7 @@
 package org.nurdin.school.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.*;
 import org.nurdin.school.enums.UserStatus;
 
 import java.time.LocalDateTime;
@@ -10,13 +9,20 @@ import java.util.Set;
 
 @Schema(description = "ДТО для пользователей со всеми его полями")
 public class UserDTO {
-    private Long id;
-    @NotBlank
+    @NotBlank(message = "Email не должен быть пустым")
+    @Email(message = "Пожалуйста введите корректный email")
     private String email;
-    @NotBlank
+
+    @Size(min = 5, max = 50, message = "Username должен содержать от 6 до 50 символов")
+    @NotBlank(message = "username не должен быть пустым")
+    @Pattern(regexp = "^[a-zA-Z0-9._-]{5,60}$", message = "Username должен содержать только латинские буквы, цифры, точки, дефисы или подчеркивания")
     private String username;
-    @NotBlank
+
+    @Size(min = 6, max = 50, message = "Пароль должен содержать от 6 до 50 символов")
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*\\d)[a-z\\d]{6,50}$",
+        message = "Пароль должен содержать хотя бы одну строчную букву и одну цифру, без спецсимволов и заглавных букв")
     private String password;
+
     private Set<RoleDTO> roles;
     private UserStatus userStatus;
 
@@ -25,13 +31,6 @@ public class UserDTO {
 
     // Геттеры и сеттеры
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getEmail() {
         return email;
@@ -85,13 +84,12 @@ public class UserDTO {
     @Override
     public String toString() {
         return "UserDTO{" +
-                "id=" + id +
-                ", email='" + email + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", roles=" + roles +
-                ", userStatus=" + userStatus +
-                ", createdAt=" + createdAt +
-                '}';
+            ", email='" + email + '\'' +
+            ", username='" + username + '\'' +
+            ", password='" + password + '\'' +
+            ", roles=" + roles +
+            ", userStatus=" + userStatus +
+            ", createdAt=" + createdAt +
+            '}';
     }
 }

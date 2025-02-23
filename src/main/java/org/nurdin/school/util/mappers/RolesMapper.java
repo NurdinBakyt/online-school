@@ -11,13 +11,11 @@ import java.util.List;
 public class RolesMapper {
     public static RoleDTO roleDTOtoEntity(RoleEntity role) {
         RoleDTO roleDTO = new RoleDTO();
-        roleDTO.setId(role.getId());
         roleDTO.setTitle(role.getTitle());
         return roleDTO;
     }
     public static RoleEntity roleEntityToDTO(RoleDTO roleDTO) {
         RoleEntity roleEntity = new RoleEntity();
-        roleEntity.setId(roleDTO.getId());
         roleEntity.setTitle(roleDTO.getTitle());
         return roleEntity;
     }

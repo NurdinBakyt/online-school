@@ -20,6 +20,9 @@ public class RoleEntity extends BaseEntity {
         this.title = title;
         this.id = id;
     }
+    public RoleEntity(String title) {
+        this.title = title;
+    }
 
     public RoleEntity() {
     }

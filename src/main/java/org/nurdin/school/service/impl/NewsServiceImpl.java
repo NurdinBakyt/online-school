@@ -75,7 +75,7 @@ public class NewsServiceImpl implements NewsService {
         return newsEntities.getContent().stream().map(entity -> {
             NewsDto dto = new NewsDto();
             Set<RoleDTO> roleDTOSet = entity.getAuthor().getRoles().stream()
-                .map(role -> new RoleDTO(role.getId(), role.getTitle()))
+                .map(role -> new RoleDTO(role.getTitle()))
                 .collect(Collectors.toSet());
 
             UserDtoResponse userDtoResponse = new UserDtoResponse(

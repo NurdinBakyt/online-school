@@ -1,6 +1,7 @@
 package org.nurdin.school.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import org.nurdin.school.dto.UserDTO;
 import org.nurdin.school.dto.response.UserDtoResponse;
 import org.nurdin.school.entity.RoleEntity;
@@ -38,7 +39,7 @@ public class UserController {
 
     @PostMapping(value = "/register")
     @Operation(summary = "Метод для регистрации новых пользователей", description = "Как можно судить пр названию, метод для регистрации новых пользователей ")
-    public ResponseEntity<UserDtoResponse> addUser(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<UserDtoResponse> addUser(@Valid @RequestBody UserDTO userDTO) {
         return ResponseEntity.ok(UserDTOMapper.userEntityToDTOResponse(
                 userService.register(UserDTOMapper.userDTOtoEntity(userDTO))
         ));

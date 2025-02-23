@@ -10,6 +10,7 @@ import org.nurdin.school.service.AuthService;
 import org.nurdin.school.service.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -31,24 +32,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserEntity register(UserEntity user) {
-        if (user.getUsername() == null || user.getUsername().trim().isEmpty()
-                || user.getPassword() == null || user.getPassword().trim().isEmpty()
-                || user.getEmail() == null || user.getEmail().trim().isEmpty()
-        ) {
-            throw new IllegalArgumentException("Данные не должны быть пустыми!");
-        }
-
         if (userRepository.existsByEmail(user.getEmail())) {
             throw new UserNotFoundException("Пользователь с таким email уже существует");
         }
         if (userRepository.existsByUsername(user.getUsername())) {
             throw new UserNotFoundException("Пользователь с таким username уже существует");
         }
-
-        if (user.getPassword() == null) {
-            throw new IllegalArgumentException("Пароль не может быть пустым");
-        }
-
         Set<RoleEntity> roles = user.getRoles() == null ? new HashSet<>() :
                 user.getRoles()
                         .stream()
@@ -69,7 +58,7 @@ public class UserServiceImpl implements UserService {
         try {
             authService.sendVerificationEmail(savedUser);
         } catch (Exception e) {
-            throw new RuntimeException("Ошибка при отправке email: {}");
+            throw new RuntimeException("Ошибка при отправке кода. ");
         }
 
         return savedUser;

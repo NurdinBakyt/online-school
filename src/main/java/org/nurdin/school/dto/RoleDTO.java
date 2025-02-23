@@ -1,28 +1,21 @@
 package org.nurdin.school.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotBlank;
 
 @Schema(description = "ДТОшка ролей")
 public class RoleDTO {
-    @Schema(description = "это ID")
-    private Long id;
     @Schema(description = "это звание")
+    @NotBlank(message = "Роль не должна быть пустой!")
     private String title;
 
-    public RoleDTO(Long id, String title) {
-        this.id = id;
+    public RoleDTO( String title) {
         this.title = title;
     }
     public RoleDTO() {
     }
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getTitle() {
         return title;
@@ -35,7 +28,6 @@ public class RoleDTO {
     @Override
     public String toString() {
         return "RoleDTO{" +
-                "id=" + id +
                 ", title='" + title + '\'' +
                 '}';
     }
