@@ -1,5 +1,6 @@
 package org.nurdin.school.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.nurdin.school.dto.BidForStudyDTO;
 import org.nurdin.school.dto.FormAcceptTheBidForStudyDTO;
 import org.nurdin.school.dto.FormRejectTheBidForStudyDTO;
@@ -47,6 +48,7 @@ public class BidForStudyController {
         return ResponseEntity.ok("заявка успешно создана");
     }
 
+    @Operation(summary = "получение всех заявок для учебы")
     @GetMapping("get_all")
     public List<BidForStudyEntity> getAllBidForStudy() {
         return bidForStudyService.getAllBidForStudy();

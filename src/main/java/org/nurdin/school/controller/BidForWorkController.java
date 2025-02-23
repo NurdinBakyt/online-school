@@ -1,6 +1,7 @@
 
 package org.nurdin.school.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.nurdin.school.dto.InvitationToInterviewForWorkDTO;
 import org.nurdin.school.dto.RejectionOfTheBidForWorkDTO;
 import org.nurdin.school.dto.response.BidForWorkResponse;
@@ -80,7 +81,7 @@ public class BidForWorkController {
 
     }
 
-
+    @Operation(summary = "получение всех заявок для работы")
     @GetMapping(value = "/getAllBids")
     public List<BidForWorkEntity> getAllBidForWork() {
         return bidForWorkService.getAllBidForWork();
