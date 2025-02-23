@@ -31,5 +31,4 @@ public class EmployeeController {
         return bidForWorkServiceImpl.getAllBidForWork();
     }
 
-
 }

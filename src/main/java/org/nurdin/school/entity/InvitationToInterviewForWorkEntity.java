@@ -25,5 +25,5 @@ public class InvitationToInterviewForWorkEntity extends BaseEntity {
         this.interviewDate = interviewDate;
     }
 
-    
+
 }

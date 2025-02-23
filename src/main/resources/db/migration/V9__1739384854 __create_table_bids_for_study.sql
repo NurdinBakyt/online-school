@@ -1,4 +1,4 @@
-CREATE TABLE bids_for_study (
+CREATE TABLE if not exists bids_for_study (
                                 id BIGSERIAL PRIMARY KEY,
                                 bid_parent VARCHAR(255),
                                 bid_status VARCHAR(255),

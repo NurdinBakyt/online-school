@@ -1,6 +1,5 @@
 package org.nurdin.school.dto;
 
-import org.nurdin.school.enums.StatusOfBid;
 
 public class BidForStudyDTO {
     private String bidParent;

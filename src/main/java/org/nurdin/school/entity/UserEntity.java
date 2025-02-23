@@ -2,14 +2,20 @@ package org.nurdin.school.entity;
 
 import jakarta.persistence.*;
 import org.nurdin.school.enums.UserStatus;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 
 @Entity
 @Table(name = "users")
-public class UserEntity extends BaseEntity {
+public class UserEntity extends BaseEntity implements UserDetails {
     private String username;
     private String email;
     private String password;
@@ -28,12 +34,19 @@ public class UserEntity extends BaseEntity {
     )
     private Set<RoleEntity> roles;
 
-    public UserEntity() {
+    @Column(name = "verification_code")
+    private String verificationCode;
 
+    @Column(name = "verification_code_expiration")
+    private LocalDateTime verificationCodeExpiration;
+    private boolean enabled;
+
+    public UserEntity() {
     }
 
-    public String getUsername() {
-        return username;
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public void setUsername(String username) {
@@ -48,9 +61,6 @@ public class UserEntity extends BaseEntity {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
 
     public void setPassword(String password) {
         this.password = password;
@@ -88,16 +98,72 @@ public class UserEntity extends BaseEntity {
         this.userStatus = userStatus;
     }
 
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public String getVerificationCode() {
+        return verificationCode;
+    }
+
+    public void setVerificationCode(String verificationCode) {
+        this.verificationCode = verificationCode;
+    }
+
+    public LocalDateTime getVerificationCodeExpiration() {
+        return verificationCodeExpiration;
+    }
+
+    public void setVerificationCodeExpiration(LocalDateTime verificationCodeExpiration) {
+        this.verificationCodeExpiration = verificationCodeExpiration;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.roles.stream()
+                .map(role -> new SimpleGrantedAuthority(role.getTitle()))
+                .collect(Collectors.toSet());
+    }
+
+    @Override
+    public String getPassword() {
+        return this.password;
+    }
+
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return UserDetails.super.isAccountNonExpired();
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return UserDetails.super.isAccountNonLocked();
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return UserDetails.super.isCredentialsNonExpired();
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return this.enabled;
+    }
+
 
     @Override
     public String toString() {
         return "UserEntity{" +
-                "email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", roles=" + roles +
-                ", createdAt=" + createdAt +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
                 ", userStatus=" + userStatus +
-                ", id=" + id +
+                ", createdAt=" + createdAt +
                 '}';
     }
 }

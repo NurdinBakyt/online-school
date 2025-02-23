@@ -1,4 +1,3 @@
-
 package org.nurdin.school.controller;
 
 import io.swagger.v3.oas.annotations.Operation;

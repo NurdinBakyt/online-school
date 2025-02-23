@@ -70,6 +70,7 @@ public class UserDTOMapper {
                 .map(roleEntity -> new RoleDTO(roleEntity.getId(), roleEntity.getTitle()))
                 .collect(Collectors.toSet()));
         userDtoResponse.setUserStatus(userEntity.getUserStatus());
+        userDtoResponse.setEnabled(userEntity.isEnabled());
         userDtoResponse.setCreatedAt();
         return userDtoResponse;
     }
