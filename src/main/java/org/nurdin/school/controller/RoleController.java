@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.nurdin.school.dto.RoleDTO;
 import org.nurdin.school.entity.RoleEntity;
 import org.nurdin.school.service.RoleService;
-import org.nurdin.school.util.RolesMapper;
+import org.nurdin.school.util.mappers.RolesMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

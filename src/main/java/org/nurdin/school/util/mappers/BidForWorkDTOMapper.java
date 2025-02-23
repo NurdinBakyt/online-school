@@ -1,7 +1,5 @@
-package org.nurdin.school.util;
+package org.nurdin.school.util.mappers;
 
-import org.nurdin.school.dto.BidForWorkDTO;
-import org.nurdin.school.entity.BidForWorkEntity;
 import org.springframework.stereotype.Service;
 
 @Service

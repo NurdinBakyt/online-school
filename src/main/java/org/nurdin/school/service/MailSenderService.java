@@ -25,12 +25,6 @@ public class MailSenderService {
 
 
     public void sendMail(String to, String subject, String text) {
-        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
-        Pattern emailPattern = Pattern.compile(emailRegex);
-
-        if (!emailPattern.matcher(to).matches()) {
-            throw new IllegalArgumentException("Invalid email format");
-        }
 
         try {
             MimeMessage message = mailSender.createMimeMessage();

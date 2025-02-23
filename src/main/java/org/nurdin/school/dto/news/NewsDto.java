@@ -1,9 +1,11 @@
-package org.nurdin.school.dto;
+package org.nurdin.school.dto.news;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.nurdin.school.dto.response.UserDtoResponse;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class NewsDto {
     private Long id;
@@ -12,6 +14,8 @@ public class NewsDto {
     private String photo;
     private UserDtoResponse author;
     private LocalDateTime dateTime;
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private List<String> images;
 
     public UserDtoResponse getAuthor() {
         return author;
@@ -61,15 +65,24 @@ public class NewsDto {
         this.id = id;
     }
 
+    public List<String> getImages() {
+        return images;
+    }
+
+    public void setImages(List<String> images) {
+        this.images = images;
+    }
+
     @Override
     public String toString() {
         return "NewsDto{" +
-                "id=" + id +
-                ", newsTitle='" + newsTitle + '\'' +
-                ", newsContent='" + newsContent + '\'' +
-                ", photo='" + photo + '\'' +
-                ", user=" + author +
-                ", dateTime=" + dateTime +
-                '}';
+            "id=" + id +
+            ", newsTitle='" + newsTitle + '\'' +
+            ", newsContent='" + newsContent + '\'' +
+            ", photo='" + photo + '\'' +
+            ", author=" + author +
+            ", dateTime=" + dateTime +
+            ", images=" + images +
+            '}';
     }
 }

@@ -1,8 +1,7 @@
-package org.nurdin.school.util;
+package org.nurdin.school.util.mappers;
 
 import org.nurdin.school.dto.BidForStudyDTO;
 import org.nurdin.school.dto.response.BidForStudyResponse;
-import org.nurdin.school.dto.response.BidForWorkResponse;
 import org.nurdin.school.entity.BidForStudyEntity;
 import org.springframework.stereotype.Component;
 

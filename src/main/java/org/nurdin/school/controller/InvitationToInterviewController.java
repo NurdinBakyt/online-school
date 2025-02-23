@@ -3,7 +3,7 @@ package org.nurdin.school.controller;
 import org.nurdin.school.dto.InvitationToInterviewForWorkDTO;
 import org.nurdin.school.entity.InvitationToInterviewForWorkEntity;
 import org.nurdin.school.service.InvitationToInterviewService;
-import org.nurdin.school.util.InvitationToInterviewMapper;
+import org.nurdin.school.util.mappers.InvitationToInterviewMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,7 +1,5 @@
 package org.nurdin.school.configuration.user;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.nurdin.school.exceptions.CustomAccessDeniedException;
 import org.nurdin.school.security.JwtAuthFilter;
 import org.springframework.context.annotation.Bean;
@@ -13,10 +11,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -63,6 +58,7 @@ public class WebSecurityConfig {
                     auth.requestMatchers("/api/v1/auth/login").permitAll();
                     auth.requestMatchers("/api/v1/auth/verify").permitAll();
                     auth.requestMatchers("/api/v1/auth/resend").permitAll();
+                    auth.requestMatchers("/api/v1/news/**/image").permitAll();
                     auth.requestMatchers("/api/v1/auth/refresh").permitAll();
                     auth.anyRequest().authenticated();
                 })
@@ -85,6 +81,7 @@ public class WebSecurityConfig {
         configuration.setAllowedOrigins(Arrays.asList(
                 "http://localhost:3000",
                 "http://localhost:8080",
+                "http://192.168.210.213:8080",
                 "https://391b-46-251-196-6.ngrok-free.app",
                 "https://a241-212-112-126-239.ngrok-free.app",
                 "https://a241-212-112-126-239.ngrok-free.app/swagger-ui/index.html",

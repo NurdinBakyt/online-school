@@ -2,6 +2,7 @@ package org.nurdin.school.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "news")
@@ -16,11 +17,13 @@ public class NewsEntity extends BaseEntity {
     @Column(name = "content", nullable = false, columnDefinition = "TEXT")
     private String content;
 
-    // private String imageName;
-    // private String imageType;
-
-    // @Lob
-    // private byte[] imageDate;
+    @ElementCollection
+    @CollectionTable(
+        name = "news_images",
+        joinColumns = @JoinColumn(name = "news_id")
+    )
+    @Column(name = "image")
+    private List<String> images;
 
     @Column(name = "date", nullable = false)
     private LocalDateTime date;
@@ -32,29 +35,13 @@ public class NewsEntity extends BaseEntity {
         this.date = LocalDateTime.now();
     }
 
-    // public void setImageDate(byte[] imageDate) {
-    //     this.imageDate = imageDate;
-    // }
+    public List<String> getImages() {
+        return images;
+    }
 
-    // public byte[] getImageDate() {
-    //     return imageDate;
-    // }
-
-    // public void setImageName(String imageName) {
-    //     this.imageName = imageName;
-    // }
-
-    // public String getImageName() {
-    //     return imageName;
-    // }
-
-    // public void setImageType(String imageType) {
-    //     this.imageType = imageType;
-    // }
-
-    // public String getImageType() {
-    //     return imageType;
-    // }
+    public void setImages(List<String> images) {
+        this.images = images;
+    }
 
     public Long getId() {
         return id;

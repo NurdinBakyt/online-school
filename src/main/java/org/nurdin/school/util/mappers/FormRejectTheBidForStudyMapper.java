@@ -1,4 +1,4 @@
-package org.nurdin.school.util;
+package org.nurdin.school.util.mappers;
 
 import org.nurdin.school.dto.FormRejectTheBidForStudyDTO;
 import org.nurdin.school.entity.FormRejectTheBidForStudyEntity;
@@ -13,4 +13,5 @@ public class FormRejectTheBidForStudyMapper {
         formRejection.setMailForRejectTheBid(formRejectTheBidForStudyDTO.getMailForRejectTheBid());
         return formRejection;
     }
+
 }
