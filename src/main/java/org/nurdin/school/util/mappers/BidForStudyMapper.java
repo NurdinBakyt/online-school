@@ -32,6 +32,7 @@ public class BidForStudyMapper {
 
     public static BidForStudyResponse createBidForStudyResponse(BidForStudyEntity bidForStudyEntity , String userName) {
         BidForStudyResponse bidForStudyResponse = new BidForStudyResponse();
+        bidForStudyResponse.setId(bidForStudyEntity.getId());
         bidForStudyResponse.setBidParent(bidForStudyEntity.getBidParent());
         bidForStudyResponse.setBidStatus(bidForStudyEntity.getBidStatus());
         bidForStudyResponse.setChildBirthCertificate(bidForStudyEntity.getChildBirthCertificate());
