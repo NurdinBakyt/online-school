@@ -12,8 +12,15 @@ public class BidForStudyServiceImpl implements BidForStudyService {
 
     private final BidForStudyRepository bidForStudyRepository;
 
+
+
     public BidForStudyServiceImpl(BidForStudyRepository bidForStudyRepository) {
         this.bidForStudyRepository = bidForStudyRepository;
+    }
+
+    @Override
+    public BidForStudyEntity findById(Long id) {
+        return bidForStudyRepository.findById(id).get();
     }
 
     @Override

@@ -40,8 +40,10 @@ public class WebSecurityConfig {
                     auth.requestMatchers("/api/v1/bidForWork/rejectTheBid").permitAll();//hasAnyAuthority("HEAD_TEACHER" ,"SECRETARY");
                     auth.requestMatchers("/api/v1/bidForWork/acceptBid").permitAll();//hasAnyAuthority("HEAD_TEACHER" ,"SECRETARY");
                     auth.requestMatchers("/api/v1/bidForWork/getAllBids").permitAll();
+                    auth.requestMatchers("/api/v1/bidForWork/approve_the_bid_for_work").permitAll();
                     auth.requestMatchers("/api/v1/bidForStudy/create").permitAll();
                     auth.requestMatchers("/api/v1/bidForStudy/get_all").permitAll();
+                    auth.requestMatchers("/api/v1/bidForStudy/approve_the_bid_for_study").permitAll();
                     auth.requestMatchers("/api/v1/bidForStudy/accept_bid_for_study").permitAll();
                     auth.requestMatchers("/api/v1/bidForStudy/reject_bid_for_study").permitAll();
                     auth.requestMatchers("/api/v1/employee/createBidForWork").permitAll();

@@ -85,5 +85,20 @@ public class BidForStudyController {
         return null;
     }
 
+    @PostMapping("/approve_the_bid_for_study")
+    public ResponseEntity<String> approveBidForStudy (@RequestParam String email , @RequestParam String emailForParent) {
+        BidForStudyEntity bidForStudyEntity = bidForStudyService.findByEmailParent(email);
+
+        bidForStudyEntity.setBidStatus(StatusOfBid.ACCEPTED);
+        bidForStudyService.saveBidForStudy(bidForStudyEntity);
+
+        UserEntity user  = userService.findByEmail(email);
+
+
+
+        mailSenderService.sendApproveMail(user, emailForParent);
+        return ResponseEntity.ok("заявка одобрена");
+    }
+
 
 }

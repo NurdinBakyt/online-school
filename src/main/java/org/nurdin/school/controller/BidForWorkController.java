@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.nurdin.school.dto.InvitationToInterviewForWorkDTO;
 import org.nurdin.school.dto.RejectionOfTheBidForWorkDTO;
 import org.nurdin.school.dto.response.BidForWorkResponse;
+import org.nurdin.school.entity.BidForStudyEntity;
 import org.nurdin.school.entity.BidForWorkEntity;
 import org.nurdin.school.entity.UserEntity;
 import org.nurdin.school.enums.StatusOfBid;
@@ -13,6 +14,7 @@ import org.nurdin.school.util.mappers.InvitationToInterviewMapper;
 import org.nurdin.school.util.mappers.RejectionOfTheBidForWorkMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -84,5 +86,20 @@ public class BidForWorkController {
     @GetMapping(value = "/getAllBids")
     public List<BidForWorkEntity> getAllBidForWork() {
         return bidForWorkService.getAllBidForWork();
+    }
+
+    @PostMapping("/approve_the_bid_for_work")
+    public ResponseEntity<String> approveBidForStudy (@RequestParam String email , @RequestParam String emailForUser) {
+        BidForWorkEntity bidForWorkEntity = bidForWorkService.getBidForWorkByUserEmail(email);
+
+        bidForWorkEntity.setBidStatus(StatusOfBid.ACCEPTED);
+        bidForWorkService.saveBidForWork(bidForWorkEntity);
+
+        UserEntity user  = userService.findByEmail(email);
+
+
+
+        mailSenderService.sendApproveMail(user, emailForUser);
+        return ResponseEntity.ok("заявка одобрена");
     }
 }
