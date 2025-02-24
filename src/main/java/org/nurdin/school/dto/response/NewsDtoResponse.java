@@ -1,5 +1,7 @@
 package org.nurdin.school.dto.response;
 
+import java.util.List;
+
 public class NewsDtoResponse {
 
             /*
@@ -13,6 +15,15 @@ public class NewsDtoResponse {
     private String newsContent;
     private String photo;
     private UserDtoResponse user;
+    private List<String> images;
+
+    public List<String> getImages() {
+        return images;
+    }
+
+    public void setImages(List<String> images) {
+        this.images = images;
+    }
 
     public String getNewsTitle() {
         return newsTitle;
