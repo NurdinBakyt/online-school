@@ -1,27 +1,14 @@
 version: "3.8"
 
 services:
-  school-app:
-    build:
-      context: .
-      dockerfile: Dockerfile.dev
-    ports:
-      - "8080:8080"
-    volumes:
-      - ".:/app"
-    depends_on:
-      - db
-      - minio
-
-  db:
-    container_name: db
+  db_pg_15:
     image: postgres:17
     environment:
-      - POSTGRES_DB=school
-      - POSTGRES_USER=dbuser
-      - POSTGRES_PASSWORD=pass
+      POSTGRES_DB: school
+      POSTGRES_USER: dbuser
+      POSTGRES_PASSWORD: pass
     ports:
-      - "5432:5432"
+      - 5432
     volumes:
       - postgres_data_v1:/var/lib/postgresql/data/
 

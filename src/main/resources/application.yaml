@@ -3,10 +3,5 @@ spring:
     name: school
   profiles:
     active: local
-  datasource:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://${DB_URL:localhost}:${DB_PORT:5432}/${DB_NAME:school}
-    username: ${DB_USER:postgres}
-    password: ${DB_PASS:postgres}
   flyway:
     enabled: true

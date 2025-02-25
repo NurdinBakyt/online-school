@@ -76,6 +76,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-docker-compose</artifactId>
+            <!--это опциональная зависимасть она не включаеться при сборки проекта-->
+            <optional>true</optional>
+        </dependency>
 <!--        JWT-->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
@@ -132,6 +138,13 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+
+                <!--Если мы хотим использовать докер compose не только в разрабодке но и эксплотаций
+                    то нам необходимо тут отключить исключение docker-compose при сборке
+                -->
+                <configuration>
+                    <excludeDockerCompose>false</excludeDockerCompose>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
