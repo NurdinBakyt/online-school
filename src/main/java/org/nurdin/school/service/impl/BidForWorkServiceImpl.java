@@ -6,6 +6,7 @@ import org.nurdin.school.service.BidForWorkService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BidForWorkServiceImpl implements BidForWorkService {
@@ -14,6 +15,12 @@ public class BidForWorkServiceImpl implements BidForWorkService {
     public BidForWorkServiceImpl(BidForWorkRepository bidForWorkRepository) {
         this.bidForWorkRepository = bidForWorkRepository;
     }
+
+    @Override
+    public Optional<BidForWorkEntity> findById(Long id) {
+        return bidForWorkRepository.findById(id);
+    }
+
     @Override
     public void saveBidForWork(BidForWorkEntity bidForWorkEntity) {
         bidForWorkRepository.save(bidForWorkEntity);

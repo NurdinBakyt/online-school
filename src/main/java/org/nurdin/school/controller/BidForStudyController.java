@@ -41,7 +41,7 @@ public class BidForStudyController {
         this.formRejectTheBidForStudyService = formRejectTheBidForStudyService;
         this.formRejectTheBidForStudyMapper = formRejectTheBidForStudyMapper;
     }
-
+    @Operation(summary = "создание заявки для учебы")
     @PostMapping("/create")
     public ResponseEntity<String> createBidForStudy (@RequestBody BidForStudyDTO bidForStudyDTO) {
         bidForStudyService.saveBidForStudy(bidForStudyMapper.bidForStudyDTOToEntity(bidForStudyDTO));
@@ -54,10 +54,11 @@ public class BidForStudyController {
         return bidForStudyService.getAllBidForStudy();
     }
 
+    @Operation(summary = "принятие заявки для учебы")
     @PostMapping("/accept_bid_for_study")
-    public BidForStudyResponse acceptBidForStudy (@RequestBody FormAcceptTheBidForStudyDTO formAcceptTheBidForStudyDTO, @RequestParam String emailParent) {
+    public BidForStudyResponse acceptBidForStudy (@RequestParam Long idBid ,@RequestBody FormAcceptTheBidForStudyDTO formAcceptTheBidForStudyDTO, @RequestParam String emailParent ) {
 
-        BidForStudyEntity bidForStudyEntity = bidForStudyService.findByEmailParent(emailParent);
+        BidForStudyEntity bidForStudyEntity = bidForStudyService.findById(idBid).get();
         bidForStudyEntity.setBidStatus(StatusOfBid.INTERVIEWEE);
         bidForStudyService.saveBidForStudy(bidForStudyEntity);
 
@@ -70,10 +71,11 @@ public class BidForStudyController {
     return bidForStudyMapper.createBidForStudyResponse(bidForStudyEntity , userEntity.getUsername());
     }
 
+    @Operation(summary = "отклонение заявки для учебы")
     @PostMapping("/reject_bid_for_study")
-    public BidForStudyResponse rejectBidForStudy (@RequestBody FormRejectTheBidForStudyDTO formRejectTheBidForStudyDTO, @RequestParam String emailParent) {
+    public BidForStudyResponse rejectBidForStudy (@RequestParam Long idBid ,@RequestBody FormRejectTheBidForStudyDTO formRejectTheBidForStudyDTO, @RequestParam String emailParent) {
 
-        BidForStudyEntity bidForStudyEntity = bidForStudyService.findByEmailParent(emailParent);
+        BidForStudyEntity bidForStudyEntity = bidForStudyService.findById(idBid).get();
         bidForStudyEntity.setBidStatus(StatusOfBid.REJECTED);
         bidForStudyService.saveBidForStudy(bidForStudyEntity);
 
@@ -82,12 +84,13 @@ public class BidForStudyController {
         formRejectTheBidForStudyService.save(formRejectTheBidForStudyMapper.formRejectionForTheBidDTOtoEntity(formRejectTheBidForStudyDTO));
 
         mailSenderService.sendMailToRejectBidForStudy(userEntity, formRejectTheBidForStudyDTO);
-        return null;
+        return bidForStudyMapper.createBidForStudyResponse(bidForStudyEntity , userEntity.getUsername());
     }
 
+    @Operation(summary = "одобрение заявки для учебы")
     @PostMapping("/approve_the_bid_for_study")
-    public ResponseEntity<String> approveBidForStudy (@RequestParam String email , @RequestParam String emailForParent) {
-        BidForStudyEntity bidForStudyEntity = bidForStudyService.findByEmailParent(email);
+    public ResponseEntity<String> approveBidForStudy (@RequestParam Long idBid ,@RequestParam String email , @RequestParam String mailForParent) {
+        BidForStudyEntity bidForStudyEntity = bidForStudyService.findById(idBid).get();
 
         bidForStudyEntity.setBidStatus(StatusOfBid.ACCEPTED);
         bidForStudyService.saveBidForStudy(bidForStudyEntity);
@@ -96,7 +99,7 @@ public class BidForStudyController {
 
 
 
-        mailSenderService.sendApproveMail(user, emailForParent);
+        mailSenderService.sendApproveMail(user, mailForParent);
         return ResponseEntity.ok("заявка одобрена");
     }
 
