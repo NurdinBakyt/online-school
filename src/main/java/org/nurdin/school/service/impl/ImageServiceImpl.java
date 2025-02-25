@@ -65,6 +65,7 @@ public class ImageServiceImpl implements ImageService {
             boolean found = minioClient.bucketExists(BucketExistsArgs.builder()
                 .bucket(bucketName)
                 .build());
+            System.out.println(found);
             if (!found) {
                 System.out.println("Бакета нету создаем новый бакет");
                 minioClient.makeBucket(MakeBucketArgs.builder()

@@ -1,6 +1,7 @@
 package org.nurdin.school.service.impl;
 
 import io.minio.errors.*;
+import jakarta.transaction.Transactional;
 import lombok.SneakyThrows;
 import org.nurdin.school.dto.news.NewsImage;
 import org.nurdin.school.exceptions.UserNotFoundException;
@@ -25,9 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -87,6 +86,7 @@ public class NewsServiceImpl implements NewsService {
             dto.setNewsContent(entity.getContent());
             dto.setDateTime(entity.getDate());
             dto.setAuthor(userDtoResponse);
+            dto.setImages(entity.getImages());
             return dto;
         }).toList();
     }
@@ -130,11 +130,14 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
+    @Transactional
     public void uploadImage(Long id, NewsImage newsImage) {
         NewsEntity news = newsRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("News not found with id: " + id));
         String fileName = imageService.upload(newsImage);
+        System.out.println(news.getImages());
         news.getImages().add(fileName);
         newsRepository.save(news);
     }
 }
+

@@ -86,11 +86,12 @@ public class NewsEntity extends BaseEntity {
     @Override
     public String toString() {
         return "NewsEntity{" +
-                "id=" + id +
-                ", author=" + author +
-                ", title='" + title + '\'' +
-                ", content='" + content + '\'' +
-                ", date=" + date +
-                '}';
+            "author=" + author +
+            ", title='" + title + '\'' +
+            ", content='" + content + '\'' +
+            ", images=" + images +
+            ", date=" + date +
+            ", id=" + id +
+            '}';
     }
 }
