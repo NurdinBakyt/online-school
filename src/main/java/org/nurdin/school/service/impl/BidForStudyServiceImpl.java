@@ -6,14 +6,22 @@ import org.nurdin.school.service.BidForStudyService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BidForStudyServiceImpl implements BidForStudyService {
 
     private final BidForStudyRepository bidForStudyRepository;
 
+
+
     public BidForStudyServiceImpl(BidForStudyRepository bidForStudyRepository) {
         this.bidForStudyRepository = bidForStudyRepository;
+    }
+
+    @Override
+    public Optional<BidForStudyEntity> findById(Long id) {
+        return bidForStudyRepository.findBidForStudyEntityById(id);
     }
 
     @Override

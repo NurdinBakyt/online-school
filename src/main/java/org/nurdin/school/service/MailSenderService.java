@@ -79,4 +79,12 @@ public class MailSenderService {
                 formRejectTheBidForStudyDTO.getMailForRejectTheBid()
         );
     }
+
+    public void sendApproveMail (UserEntity user , String mailForUser) {
+        sendMail(
+            user.getEmail(),
+            user.getUsername(),
+            mailForUser
+        );
+}
 }

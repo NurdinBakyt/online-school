@@ -28,7 +28,8 @@ public class BidForWorkMapper {
     //метод, который берет UserEntity и BidForWork по имейлу определенного юзера и собирает в Response
     public static BidForWorkResponse bidForWorkEntityAndUserEntityToBidForWorkAcceptResponse(UserEntity userEntity , BidForWorkEntity bidForWorkEntity) {
         BidForWorkResponse bidForWorkResponse = new BidForWorkResponse();
-        bidForWorkResponse.setUsername(userEntity.getUsername());
+        bidForWorkResponse.setId(bidForWorkEntity.getId());
+        bidForWorkResponse.setUserName(userEntity.getUsername());
         bidForWorkResponse.setResume(bidForWorkEntity.getResume());
         bidForWorkResponse.setPassport(bidForWorkEntity.getPassport());
         bidForWorkResponse.setBidStatus(bidForWorkEntity.getBidStatus());

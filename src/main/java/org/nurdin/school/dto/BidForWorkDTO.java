@@ -1,11 +1,8 @@
 package org.nurdin.school.dto;
 
-import org.nurdin.school.enums.StatusOfBid;
-
 public class BidForWorkDTO {
     private String resume;
     private String passport;
-    private StatusOfBid bidStatus;
     private String name;
     private String surname;
     private String patronymic;
@@ -35,14 +32,6 @@ public class BidForWorkDTO {
 
     public void setPassport(String passport) {
         this.passport = passport;
-    }
-
-    public StatusOfBid getBidStatus() {
-        return bidStatus;
-    }
-
-    public void setBidStatus(StatusOfBid bidStatus) {
-        this.bidStatus = bidStatus;
     }
 
     public String getName() {
