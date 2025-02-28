@@ -139,5 +139,5 @@ public class NewsServiceImpl implements NewsService {
         news.getImages().add(fileName);
         newsRepository.save(news);
     }
-}
 
+}

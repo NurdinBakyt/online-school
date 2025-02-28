@@ -2,20 +2,24 @@ package org.nurdin.school.service.impl;
 
 import io.minio.*;
 import io.minio.errors.*;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.compress.utils.IOUtils;
 import org.nurdin.school.dto.news.NewsImage;
 import org.nurdin.school.service.ImageService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.UUID;
 
 @Service
 public class ImageServiceImpl implements ImageService {
+    private static final Logger log = LoggerFactory.getLogger(ImageServiceImpl.class);
     private final MinioClient minioClient;
     private final String bucketName;
 
@@ -47,6 +51,26 @@ public class ImageServiceImpl implements ImageService {
         return fileName;
     }
 
+    @Override
+    public void download(String key) {
+        try {
+            minioClient.downloadObject(
+                DownloadObjectArgs.builder()
+                    .object(key)
+                    .bucket(bucketName)
+                    .build()
+            );
+
+        } catch (ServerException | InsufficientDataException | ErrorResponseException |
+                 IOException | NoSuchAlgorithmException | InvalidKeyException |
+                 InvalidResponseException | XmlParserException | InternalException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+
+
     private String generateFileName(MultipartFile multipartFile) {
         String extension = getExtension(multipartFile);
         return UUID.randomUUID() + "." + extension;
@@ -72,7 +96,7 @@ public class ImageServiceImpl implements ImageService {
                     .bucket(bucketName)
                     .build());
 
-            }else{
+            } else {
                 System.out.println("Бакет уже есть");
             }
         } catch (ServerException | InsufficientDataException | ErrorResponseException |
