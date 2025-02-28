@@ -1,6 +1,5 @@
 package org.nurdin.school.service;
 
-import io.minio.errors.*;
 import org.nurdin.school.dto.news.NewsDto;
 import org.nurdin.school.dto.news.NewsImage;
 import org.nurdin.school.dto.request.NewsCreateDTO;
@@ -9,8 +8,6 @@ import org.nurdin.school.entity.NewsEntity;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 public interface NewsService {

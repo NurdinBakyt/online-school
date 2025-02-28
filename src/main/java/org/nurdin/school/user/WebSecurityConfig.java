@@ -1,4 +1,4 @@
-package org.nurdin.school.configuration.user;
+package org.nurdin.school.user;
 
 import org.nurdin.school.exceptions.CustomAccessDeniedException;
 import org.nurdin.school.security.JwtAuthFilter;

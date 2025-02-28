@@ -1,8 +1,6 @@
 package org.nurdin.school.service.impl;
 
-import io.minio.errors.*;
 import jakarta.transaction.Transactional;
-import lombok.SneakyThrows;
 import org.nurdin.school.dto.news.NewsImage;
 import org.nurdin.school.exceptions.UserNotFoundException;
 import org.nurdin.school.service.ImageService;
@@ -18,14 +16,11 @@ import org.nurdin.school.repository.NewsRepository;
 import org.nurdin.school.repository.UserRepository;
 import org.nurdin.school.service.NewsService;
 import org.nurdin.school.util.mappers.NewsDtoMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
 import java.util.*;
 import java.util.stream.Collectors;
 

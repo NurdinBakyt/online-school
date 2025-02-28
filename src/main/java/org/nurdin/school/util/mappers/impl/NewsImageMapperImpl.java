@@ -2,7 +2,6 @@ package org.nurdin.school.util.mappers.impl;
 
 import org.nurdin.school.dto.news.NewsImage;
 import org.nurdin.school.dto.news.NewsImageDTO;
-import org.nurdin.school.util.Mappable;
 import org.nurdin.school.util.mappers.NewsImageMapper;
 import org.springframework.stereotype.Component;
 

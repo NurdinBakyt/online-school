@@ -1,7 +1,5 @@
 package org.nurdin.school.dto;
 
-import org.nurdin.school.entity.DirectorEntity;
-
 public class EmployeeDTO {
     private Long id;
     private String name;

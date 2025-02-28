@@ -7,12 +7,9 @@ import org.nurdin.school.dto.FormRejectTheBidForStudyDTO;
 import org.nurdin.school.dto.InvitationToInterviewForWorkDTO;
 import org.nurdin.school.dto.RejectionOfTheBidForWorkDTO;
 import org.nurdin.school.entity.UserEntity;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-
-import java.util.regex.Pattern;
 
 @Service
 public class MailSenderService {
