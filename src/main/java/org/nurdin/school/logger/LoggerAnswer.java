@@ -4,14 +4,16 @@ import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 
 @Aspect
 @Component
-@Slf4j
 public class LoggerAnswer {
+    private final Logger log = LoggerFactory.getLogger(LoggerAnswer.class);
 
     @Pointcut("execution(* org.nurdin.school..*(..)) && !within(org.nurdin.school.security..*)")
     private void publicMethodsFromLoggingPackage() {
