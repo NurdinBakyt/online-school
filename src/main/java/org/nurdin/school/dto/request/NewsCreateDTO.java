@@ -18,7 +18,7 @@ public class NewsCreateDTO {
     public void setNewsContent(String newsContent) {
         this.newsContent = newsContent;
     }
- 
+
     public String getUsername() {
         return username;
     }

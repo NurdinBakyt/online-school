@@ -5,7 +5,6 @@ import org.nurdin.school.dto.BidForWorkDTO;
 import org.nurdin.school.dto.InvitationToInterviewForWorkDTO;
 import org.nurdin.school.dto.RejectionOfTheBidForWorkDTO;
 import org.nurdin.school.dto.response.BidForWorkResponse;
-import org.nurdin.school.entity.BidForStudyEntity;
 import org.nurdin.school.entity.BidForWorkEntity;
 import org.nurdin.school.entity.UserEntity;
 import org.nurdin.school.enums.StatusOfBid;
@@ -19,7 +18,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "api/v1/bidForWork")

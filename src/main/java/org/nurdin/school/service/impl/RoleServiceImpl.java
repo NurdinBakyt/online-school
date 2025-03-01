@@ -2,7 +2,6 @@ package org.nurdin.school.service.impl;
 
 import jakarta.transaction.Transactional;
 import org.nurdin.school.entity.RoleEntity;
-import org.nurdin.school.entity.UserEntity;
 import org.nurdin.school.exceptions.RoleNotFoundException;
 import org.nurdin.school.exceptions.UserNotFoundException;
 import org.nurdin.school.repository.RoleRepository;

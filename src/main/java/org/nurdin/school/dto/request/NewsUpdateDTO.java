@@ -7,7 +7,7 @@ public class NewsUpdateDTO {
     private String newsTitle;
     private String newsContent;
     private UserEntity author;
-    
+
     public UserEntity getAuthor() {
         return author;
     }

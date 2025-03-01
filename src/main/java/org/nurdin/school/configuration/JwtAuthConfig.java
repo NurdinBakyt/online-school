@@ -1,4 +1,4 @@
-package org.nurdin.school.configuration.user;
+package org.nurdin.school.configuration;
 
 import org.nurdin.school.exceptions.UserNotFoundException;
 import org.nurdin.school.repository.UserRepository;
