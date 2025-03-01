@@ -40,23 +40,23 @@ public class ImageController {
     }
 
 
-    @GetMapping("/download/{fileName}")
-    public ResponseEntity<InputStreamResource> downloadFile(@PathVariable("fileName") String fileName) {
+    @GetMapping("/download/{filename}")
+    public ResponseEntity<InputStreamResource> downloadFile(@PathVariable String filename) {
         try {
             InputStream stream = minioClient.getObject(
                 GetObjectArgs.builder()
                     .bucket(minioConfig.getBucket())
-                    .object(fileName)
+                    .object(filename)
                     .build()
             );
 
-            String contentType = Files.probeContentType(Paths.get(fileName));
+            String contentType = Files.probeContentType(Paths.get(filename));
             if (contentType == null) {
                 contentType = MediaType.APPLICATION_OCTET_STREAM_VALUE;
             }
 
             HttpHeaders headers = new HttpHeaders();
-            headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"");
+            headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + filename + "\"");
             headers.add(HttpHeaders.CONTENT_TYPE, contentType);
 
             return ResponseEntity.ok()

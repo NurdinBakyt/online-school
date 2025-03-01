@@ -37,37 +37,37 @@ public class WebSecurityConfig {
             .csrf(securityFilterChain -> securityFilterChain.disable())
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .authorizeHttpRequests(auth -> {
-//                System.out.println("configuring");
-//                auth.requestMatchers("/api/v1/bidForWork/rejectTheBid").permitAll();//hasAnyAuthority("HEAD_TEACHER" ,"SECRETARY");
-//                auth.requestMatchers("/api/v1/bidForWork/acceptBid").permitAll();//hasAnyAuthority("HEAD_TEACHER" ,"SECRETARY");
-//                auth.requestMatchers("/api/v1/bidForWork/getAllBids").permitAll();
-//                auth.requestMatchers("/api/v1/bidForWork/approve_the_bid_for_work").permitAll();
-//                auth.requestMatchers("/api/v1/bidForWork/createBidForWork").permitAll();
-//                auth.requestMatchers("/api/v1/bidForStudy/create").permitAll();
-//                auth.requestMatchers("/api/v1/bidForStudy/get_all").permitAll();
-//                auth.requestMatchers("/api/v1/bidForStudy/approve_the_bid_for_study").permitAll();
-//                auth.requestMatchers("/api/v1/bidForStudy/accept_bid_for_study").permitAll();
-//                auth.requestMatchers("/api/v1/bidForStudy/reject_bid_for_study").permitAll();
-//                auth.requestMatchers("/api/v1/employee/createBidForWork").permitAll();
-//                auth.requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll();
-//                auth.requestMatchers("/api/v1/user/**").permitAll();
-//                auth.requestMatchers("/api/v1/auth/user-roles").permitAll();
-//                auth.requestMatchers("/api/v1/news/**").permitAll();
-//                auth.requestMatchers("/api/v1/news/").permitAll();
-//                auth.requestMatchers("/api/v1/bidForWork/getAllBids").hasAnyAuthority("HEAD_TEACHER", "SECRETARY");
-//                auth.requestMatchers("/api/v1/role/get-all-roles").permitAll();
-//                auth.requestMatchers("/api/v1/bidForWork/acceptBid/", "/api/v1/bidForWork/rejectTheBid").
-//                    hasAnyAuthority("HEAD_TEACHER", "SECRETARY");
-//                auth.requestMatchers("/api/v1/employee/createBidForWork").hasAuthority("EMPLOYEE");
-//                auth.requestMatchers("/api/v1/auth/login").permitAll();
-//                auth.requestMatchers("/api/v1/auth/verify").permitAll();
-//                auth.requestMatchers("/api/v1/auth/resend").permitAll();
-//                auth.requestMatchers("/api/v1/news/**/image").permitAll();
-//                auth.requestMatchers("/api/v1/auth/refresh").permitAll();
-//                auth.requestMatchers("/api/v1/minio/download/**").permitAll();
-//                auth.requestMatchers("/favicon.ico", "/**/*.png", "/**/*.jpg", "/**/*.jpeg", "/**/*.css", "/**/*.js")
-//                    .permitAll();
-                auth.anyRequest().permitAll();
+                System.out.println("configuring");
+                auth.requestMatchers("/api/v1/bidForWork/rejectTheBid").permitAll();//hasAnyAuthority("HEAD_TEACHER" ,"SECRETARY");
+                auth.requestMatchers("/api/v1/bidForWork/acceptBid").permitAll();//hasAnyAuthority("HEAD_TEACHER" ,"SECRETARY");
+                auth.requestMatchers("/api/v1/bidForWork/getAllBids").permitAll();
+                auth.requestMatchers("/api/v1/bidForWork/approve_the_bid_for_work").permitAll();
+                auth.requestMatchers("/api/v1/bidForWork/createBidForWork").permitAll();
+                auth.requestMatchers("/api/v1/bidForStudy/create").permitAll();
+                auth.requestMatchers("/api/v1/bidForStudy/get_all").permitAll();
+                auth.requestMatchers("/api/v1/bidForStudy/approve_the_bid_for_study").permitAll();
+                auth.requestMatchers("/api/v1/bidForStudy/accept_bid_for_study").permitAll();
+                auth.requestMatchers("/api/v1/bidForStudy/reject_bid_for_study").permitAll();
+                auth.requestMatchers("/api/v1/employee/createBidForWork").permitAll();
+                auth.requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll();
+                auth.requestMatchers("/api/v1/user/**").permitAll();
+                auth.requestMatchers("/api/v1/auth/user-roles").permitAll();
+                auth.requestMatchers("/api/v1/news/**").permitAll();
+                auth.requestMatchers("/api/v1/news/").permitAll();
+                auth.requestMatchers("/api/v1/bidForWork/getAllBids").hasAnyAuthority("HEAD_TEACHER", "SECRETARY");
+                auth.requestMatchers("/api/v1/role/get-all-roles").permitAll();
+                auth.requestMatchers("/api/v1/bidForWork/acceptBid/", "/api/v1/bidForWork/rejectTheBid").
+                    hasAnyAuthority("HEAD_TEACHER", "SECRETARY");
+                auth.requestMatchers("/api/v1/employee/createBidForWork").hasAuthority("EMPLOYEE");
+                auth.requestMatchers("/api/v1/auth/login").permitAll();
+                auth.requestMatchers("/api/v1/auth/verify").permitAll();
+                auth.requestMatchers("/api/v1/auth/resend").permitAll();
+                auth.requestMatchers("/api/v1/news/**/image").permitAll();
+                auth.requestMatchers("/api/v1/auth/refresh").permitAll();
+                auth.requestMatchers("/api/v1/minio/download/**").permitAll();
+                auth.requestMatchers("/favicon.ico", "/**/*.png", "/**/*.jpg", "/**/*.jpeg", "/**/*.css", "/**/*.js")
+                    .permitAll();
+                auth.anyRequest().authenticated();
             })
             .exceptionHandling(exception -> {
                 exception.accessDeniedHandler(new CustomAccessDeniedException());
