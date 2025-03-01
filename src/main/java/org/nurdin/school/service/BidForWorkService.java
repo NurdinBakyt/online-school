@@ -1,6 +1,5 @@
 package org.nurdin.school.service;
 
-import org.nurdin.school.entity.BidForStudyEntity;
 import org.nurdin.school.entity.BidForWorkEntity;
 
 import java.util.List;

@@ -1,7 +1,6 @@
 package org.nurdin.school.service;
 
 import org.nurdin.school.entity.UserEntity;
-import org.nurdin.school.exceptions.UserExistsException;
 
 import java.util.List;
 import java.util.Optional;
