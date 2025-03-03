@@ -12,4 +12,4 @@ log "Начало сборки проекта"
 mvn clean package -DskipTests
 
 log "Запуск докера"
-docker-compose -f docker-compose-frontend.yml up --build
+docker-compose  up --build

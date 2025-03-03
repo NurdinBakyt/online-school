@@ -1,0 +1,43 @@
+version: "3.8"
+
+services:
+  school-app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8080:8080"
+    volumes:
+      - ".:/app"
+    depends_on:
+      - db
+      - minio
+
+  db:
+    container_name: db
+    image: postgres:17
+    environment:
+      - POSTGRES_DB=school
+      - POSTGRES_USER=dbuser
+      - POSTGRES_PASSWORD=pass
+    ports:
+      - "5430:5432"
+    volumes:
+      - postgres_data_v1:/var/lib/postgresql/data/
+
+  minio:
+    image: minio/minio:latest
+    container_name: minio
+    environment:
+      - MINIO_ROOT_USER=minioadmin
+      - MINIO_ROOT_PASSWORD=minioadmin
+    command: server /data --address ":9001" --console-address ":9000"
+    ports:
+      - "9001:9001"
+      - "9000:9000"
+    volumes:
+      - minio_data:/data
+
+volumes:
+  postgres_data_v1:
+  minio_data:
